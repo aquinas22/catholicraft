@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "catholicraft:biretta"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "catholicraft:biretta"
+      }
+    ]
+  }
+}

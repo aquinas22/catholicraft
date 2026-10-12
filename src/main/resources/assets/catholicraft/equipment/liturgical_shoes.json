@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "catholicraft:liturgical_shoes"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "catholicraft:liturgical_shoes"
+      }
+    ]
+  }
+}

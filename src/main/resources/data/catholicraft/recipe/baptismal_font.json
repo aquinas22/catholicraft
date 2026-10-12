@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "Q Q",
+    "QCQ",
+    "QQQ"
+  ],
+  "key": {
+    "Q": "minecraft:quartz_block",
+    "C": "minecraft:cauldron"
+  },
+  "result": {
+    "id": "catholicraft:baptismal_font",
+    "count": 1
+  }
+}

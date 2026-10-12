@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " Q ",
+    "BQB",
+    "QQQ"
+  ],
+  "key": {
+    "Q": "minecraft:quartz",
+    "B": "minecraft:blue_dye"
+  },
+  "result": {
+    "id": "catholicraft:our_lady_statue",
+    "count": 1
+  }
+}

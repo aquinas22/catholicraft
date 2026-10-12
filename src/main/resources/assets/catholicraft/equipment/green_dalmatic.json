@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "catholicraft:green_dalmatic"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "catholicraft:green_dalmatic"
+      }
+    ]
+  }
+}

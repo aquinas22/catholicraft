@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "WWW",
+    "QQQ",
+    "Q Q"
+  ],
+  "key": {
+    "W": "minecraft:white_wool",
+    "Q": "minecraft:quartz_block"
+  },
+  "result": {
+    "id": "catholicraft:altar",
+    "count": 1
+  }
+}

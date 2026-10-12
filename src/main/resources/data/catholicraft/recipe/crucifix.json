@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " N ",
+    "SNS",
+    " S "
+  ],
+  "key": {
+    "N": "minecraft:gold_nugget",
+    "S": "minecraft:stick"
+  },
+  "result": {
+    "id": "catholicraft:crucifix",
+    "count": 1
+  }
+}

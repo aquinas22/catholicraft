@@ -1,0 +1,84 @@
+{
+  "variants": {
+    "facing=north,candles=0": {
+      "model": "catholicraft:block/advent_wreath",
+      "y": 0
+    },
+    "facing=north,candles=1": {
+      "model": "catholicraft:block/advent_wreath_1",
+      "y": 0
+    },
+    "facing=north,candles=2": {
+      "model": "catholicraft:block/advent_wreath_2",
+      "y": 0
+    },
+    "facing=north,candles=3": {
+      "model": "catholicraft:block/advent_wreath_3",
+      "y": 0
+    },
+    "facing=north,candles=4": {
+      "model": "catholicraft:block/advent_wreath_4",
+      "y": 0
+    },
+    "facing=east,candles=0": {
+      "model": "catholicraft:block/advent_wreath",
+      "y": 90
+    },
+    "facing=east,candles=1": {
+      "model": "catholicraft:block/advent_wreath_1",
+      "y": 90
+    },
+    "facing=east,candles=2": {
+      "model": "catholicraft:block/advent_wreath_2",
+      "y": 90
+    },
+    "facing=east,candles=3": {
+      "model": "catholicraft:block/advent_wreath_3",
+      "y": 90
+    },
+    "facing=east,candles=4": {
+      "model": "catholicraft:block/advent_wreath_4",
+      "y": 90
+    },
+    "facing=south,candles=0": {
+      "model": "catholicraft:block/advent_wreath",
+      "y": 180
+    },
+    "facing=south,candles=1": {
+      "model": "catholicraft:block/advent_wreath_1",
+      "y": 180
+    },
+    "facing=south,candles=2": {
+      "model": "catholicraft:block/advent_wreath_2",
+      "y": 180
+    },
+    "facing=south,candles=3": {
+      "model": "catholicraft:block/advent_wreath_3",
+      "y": 180
+    },
+    "facing=south,candles=4": {
+      "model": "catholicraft:block/advent_wreath_4",
+      "y": 180
+    },
+    "facing=west,candles=0": {
+      "model": "catholicraft:block/advent_wreath",
+      "y": 270
+    },
+    "facing=west,candles=1": {
+      "model": "catholicraft:block/advent_wreath_1",
+      "y": 270
+    },
+    "facing=west,candles=2": {
+      "model": "catholicraft:block/advent_wreath_2",
+      "y": 270
+    },
+    "facing=west,candles=3": {
+      "model": "catholicraft:block/advent_wreath_3",
+      "y": 270
+    },
+    "facing=west,candles=4": {
+      "model": "catholicraft:block/advent_wreath_4",
+      "y": 270
+    }
+  }
+}

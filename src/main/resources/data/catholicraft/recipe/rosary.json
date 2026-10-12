@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "SSS",
+    "S S",
+    " G "
+  ],
+  "key": {
+    "S": "minecraft:string",
+    "G": "minecraft:gold_nugget"
+  },
+  "result": {
+    "id": "catholicraft:rosary",
+    "count": 1
+  }
+}

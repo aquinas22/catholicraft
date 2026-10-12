@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "WWW",
+    "W W",
+    "W W"
+  ],
+  "key": {
+    "W": "minecraft:white_wool"
+  },
+  "result": {
+    "id": "catholicraft:alb",
+    "count": 1
+  }
+}

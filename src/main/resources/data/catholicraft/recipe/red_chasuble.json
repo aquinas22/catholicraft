@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "W W",
+    "WGW",
+    "WDW"
+  ],
+  "key": {
+    "W": "minecraft:white_wool",
+    "G": "minecraft:gold_nugget",
+    "D": "minecraft:red_dye"
+  },
+  "result": {
+    "id": "catholicraft:red_chasuble",
+    "count": 1
+  }
+}

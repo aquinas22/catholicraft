@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " G ",
+    "GRG",
+    " G "
+  ],
+  "key": {
+    "G": "minecraft:gold_ingot",
+    "R": "minecraft:red_stained_glass"
+  },
+  "result": {
+    "id": "catholicraft:sanctuary_lamp",
+    "count": 1
+  }
+}

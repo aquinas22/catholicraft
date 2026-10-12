@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "catholicraft:block/st_joseph_statue",
+      "y": 0
+    },
+    "facing=east": {
+      "model": "catholicraft:block/st_joseph_statue",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "catholicraft:block/st_joseph_statue",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "catholicraft:block/st_joseph_statue",
+      "y": 270
+    }
+  }
+}

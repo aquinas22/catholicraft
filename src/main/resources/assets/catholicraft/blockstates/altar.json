@@ -1,0 +1,100 @@
+{
+  "variants": {
+    "facing=north,cloth=0": {
+      "model": "catholicraft:block/altar",
+      "y": 0
+    },
+    "facing=north,cloth=1": {
+      "model": "catholicraft:block/altar_1",
+      "y": 0
+    },
+    "facing=north,cloth=2": {
+      "model": "catholicraft:block/altar_2",
+      "y": 0
+    },
+    "facing=north,cloth=3": {
+      "model": "catholicraft:block/altar_3",
+      "y": 0
+    },
+    "facing=north,cloth=4": {
+      "model": "catholicraft:block/altar_4",
+      "y": 0
+    },
+    "facing=north,cloth=5": {
+      "model": "catholicraft:block/altar_5",
+      "y": 0
+    },
+    "facing=east,cloth=0": {
+      "model": "catholicraft:block/altar",
+      "y": 90
+    },
+    "facing=east,cloth=1": {
+      "model": "catholicraft:block/altar_1",
+      "y": 90
+    },
+    "facing=east,cloth=2": {
+      "model": "catholicraft:block/altar_2",
+      "y": 90
+    },
+    "facing=east,cloth=3": {
+      "model": "catholicraft:block/altar_3",
+      "y": 90
+    },
+    "facing=east,cloth=4": {
+      "model": "catholicraft:block/altar_4",
+      "y": 90
+    },
+    "facing=east,cloth=5": {
+      "model": "catholicraft:block/altar_5",
+      "y": 90
+    },
+    "facing=south,cloth=0": {
+      "model": "catholicraft:block/altar",
+      "y": 180
+    },
+    "facing=south,cloth=1": {
+      "model": "catholicraft:block/altar_1",
+      "y": 180
+    },
+    "facing=south,cloth=2": {
+      "model": "catholicraft:block/altar_2",
+      "y": 180
+    },
+    "facing=south,cloth=3": {
+      "model": "catholicraft:block/altar_3",
+      "y": 180
+    },
+    "facing=south,cloth=4": {
+      "model": "catholicraft:block/altar_4",
+      "y": 180
+    },
+    "facing=south,cloth=5": {
+      "model": "catholicraft:block/altar_5",
+      "y": 180
+    },
+    "facing=west,cloth=0": {
+      "model": "catholicraft:block/altar",
+      "y": 270
+    },
+    "facing=west,cloth=1": {
+      "model": "catholicraft:block/altar_1",
+      "y": 270
+    },
+    "facing=west,cloth=2": {
+      "model": "catholicraft:block/altar_2",
+      "y": 270
+    },
+    "facing=west,cloth=3": {
+      "model": "catholicraft:block/altar_3",
+      "y": 270
+    },
+    "facing=west,cloth=4": {
+      "model": "catholicraft:block/altar_4",
+      "y": 270
+    },
+    "facing=west,cloth=5": {
+      "model": "catholicraft:block/altar_5",
+      "y": 270
+    }
+  }
+}

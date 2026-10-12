@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "catholicraft:block/chalice",
+      "y": 0
+    },
+    "facing=east": {
+      "model": "catholicraft:block/chalice",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "catholicraft:block/chalice",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "catholicraft:block/chalice",
+      "y": 270
+    }
+  }
+}

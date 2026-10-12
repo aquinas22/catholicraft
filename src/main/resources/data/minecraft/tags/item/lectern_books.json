@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "catholicraft:missal_1962",
+    "catholicraft:modern_missal",
+    "catholicraft:field_guide",
+    "catholicraft:prayer_book",
+    "catholicraft:stations_book"
+  ]
+}

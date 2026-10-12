@@ -1,0 +1,228 @@
+{
+  "variants": {
+    "facing=north,station=1": {
+      "model": "catholicraft:block/stations_of_the_cross",
+      "y": 0
+    },
+    "facing=north,station=2": {
+      "model": "catholicraft:block/stations_of_the_cross_2",
+      "y": 0
+    },
+    "facing=north,station=3": {
+      "model": "catholicraft:block/stations_of_the_cross_3",
+      "y": 0
+    },
+    "facing=north,station=4": {
+      "model": "catholicraft:block/stations_of_the_cross_4",
+      "y": 0
+    },
+    "facing=north,station=5": {
+      "model": "catholicraft:block/stations_of_the_cross_5",
+      "y": 0
+    },
+    "facing=north,station=6": {
+      "model": "catholicraft:block/stations_of_the_cross_6",
+      "y": 0
+    },
+    "facing=north,station=7": {
+      "model": "catholicraft:block/stations_of_the_cross_7",
+      "y": 0
+    },
+    "facing=north,station=8": {
+      "model": "catholicraft:block/stations_of_the_cross_8",
+      "y": 0
+    },
+    "facing=north,station=9": {
+      "model": "catholicraft:block/stations_of_the_cross_9",
+      "y": 0
+    },
+    "facing=north,station=10": {
+      "model": "catholicraft:block/stations_of_the_cross_10",
+      "y": 0
+    },
+    "facing=north,station=11": {
+      "model": "catholicraft:block/stations_of_the_cross_11",
+      "y": 0
+    },
+    "facing=north,station=12": {
+      "model": "catholicraft:block/stations_of_the_cross_12",
+      "y": 0
+    },
+    "facing=north,station=13": {
+      "model": "catholicraft:block/stations_of_the_cross_13",
+      "y": 0
+    },
+    "facing=north,station=14": {
+      "model": "catholicraft:block/stations_of_the_cross_14",
+      "y": 0
+    },
+    "facing=east,station=1": {
+      "model": "catholicraft:block/stations_of_the_cross",
+      "y": 90
+    },
+    "facing=east,station=2": {
+      "model": "catholicraft:block/stations_of_the_cross_2",
+      "y": 90
+    },
+    "facing=east,station=3": {
+      "model": "catholicraft:block/stations_of_the_cross_3",
+      "y": 90
+    },
+    "facing=east,station=4": {
+      "model": "catholicraft:block/stations_of_the_cross_4",
+      "y": 90
+    },
+    "facing=east,station=5": {
+      "model": "catholicraft:block/stations_of_the_cross_5",
+      "y": 90
+    },
+    "facing=east,station=6": {
+      "model": "catholicraft:block/stations_of_the_cross_6",
+      "y": 90
+    },
+    "facing=east,station=7": {
+      "model": "catholicraft:block/stations_of_the_cross_7",
+      "y": 90
+    },
+    "facing=east,station=8": {
+      "model": "catholicraft:block/stations_of_the_cross_8",
+      "y": 90
+    },
+    "facing=east,station=9": {
+      "model": "catholicraft:block/stations_of_the_cross_9",
+      "y": 90
+    },
+    "facing=east,station=10": {
+      "model": "catholicraft:block/stations_of_the_cross_10",
+      "y": 90
+    },
+    "facing=east,station=11": {
+      "model": "catholicraft:block/stations_of_the_cross_11",
+      "y": 90
+    },
+    "facing=east,station=12": {
+      "model": "catholicraft:block/stations_of_the_cross_12",
+      "y": 90
+    },
+    "facing=east,station=13": {
+      "model": "catholicraft:block/stations_of_the_cross_13",
+      "y": 90
+    },
+    "facing=east,station=14": {
+      "model": "catholicraft:block/stations_of_the_cross_14",
+      "y": 90
+    },
+    "facing=south,station=1": {
+      "model": "catholicraft:block/stations_of_the_cross",
+      "y": 180
+    },
+    "facing=south,station=2": {
+      "model": "catholicraft:block/stations_of_the_cross_2",
+      "y": 180
+    },
+    "facing=south,station=3": {
+      "model": "catholicraft:block/stations_of_the_cross_3",
+      "y": 180
+    },
+    "facing=south,station=4": {
+      "model": "catholicraft:block/stations_of_the_cross_4",
+      "y": 180
+    },
+    "facing=south,station=5": {
+      "model": "catholicraft:block/stations_of_the_cross_5",
+      "y": 180
+    },
+    "facing=south,station=6": {
+      "model": "catholicraft:block/stations_of_the_cross_6",
+      "y": 180
+    },
+    "facing=south,station=7": {
+      "model": "catholicraft:block/stations_of_the_cross_7",
+      "y": 180
+    },
+    "facing=south,station=8": {
+      "model": "catholicraft:block/stations_of_the_cross_8",
+      "y": 180
+    },
+    "facing=south,station=9": {
+      "model": "catholicraft:block/stations_of_the_cross_9",
+      "y": 180
+    },
+    "facing=south,station=10": {
+      "model": "catholicraft:block/stations_of_the_cross_10",
+      "y": 180
+    },
+    "facing=south,station=11": {
+      "model": "catholicraft:block/stations_of_the_cross_11",
+      "y": 180
+    },
+    "facing=south,station=12": {
+      "model": "catholicraft:block/stations_of_the_cross_12",
+      "y": 180
+    },
+    "facing=south,station=13": {
+      "model": "catholicraft:block/stations_of_the_cross_13",
+      "y": 180
+    },
+    "facing=south,station=14": {
+      "model": "catholicraft:block/stations_of_the_cross_14",
+      "y": 180
+    },
+    "facing=west,station=1": {
+      "model": "catholicraft:block/stations_of_the_cross",
+      "y": 270
+    },
+    "facing=west,station=2": {
+      "model": "catholicraft:block/stations_of_the_cross_2",
+      "y": 270
+    },
+    "facing=west,station=3": {
+      "model": "catholicraft:block/stations_of_the_cross_3",
+      "y": 270
+    },
+    "facing=west,station=4": {
+      "model": "catholicraft:block/stations_of_the_cross_4",
+      "y": 270
+    },
+    "facing=west,station=5": {
+      "model": "catholicraft:block/stations_of_the_cross_5",
+      "y": 270
+    },
+    "facing=west,station=6": {
+      "model": "catholicraft:block/stations_of_the_cross_6",
+      "y": 270
+    },
+    "facing=west,station=7": {
+      "model": "catholicraft:block/stations_of_the_cross_7",
+      "y": 270
+    },
+    "facing=west,station=8": {
+      "model": "catholicraft:block/stations_of_the_cross_8",
+      "y": 270
+    },
+    "facing=west,station=9": {
+      "model": "catholicraft:block/stations_of_the_cross_9",
+      "y": 270
+    },
+    "facing=west,station=10": {
+      "model": "catholicraft:block/stations_of_the_cross_10",
+      "y": 270
+    },
+    "facing=west,station=11": {
+      "model": "catholicraft:block/stations_of_the_cross_11",
+      "y": 270
+    },
+    "facing=west,station=12": {
+      "model": "catholicraft:block/stations_of_the_cross_12",
+      "y": 270
+    },
+    "facing=west,station=13": {
+      "model": "catholicraft:block/stations_of_the_cross_13",
+      "y": 270
+    },
+    "facing=west,station=14": {
+      "model": "catholicraft:block/stations_of_the_cross_14",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "catholicraft:crucifix",
+    "catholicraft:kneeler",
+    "catholicraft:pew",
+    "catholicraft:sacristy_cabinet",
+    "catholicraft:stations_of_the_cross",
+    "catholicraft:credence_table",
+    "catholicraft:ambo"
+  ]
+}

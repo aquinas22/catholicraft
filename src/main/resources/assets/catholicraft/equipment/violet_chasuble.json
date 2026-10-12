@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "catholicraft:violet_chasuble"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "catholicraft:violet_chasuble"
+      }
+    ]
+  }
+}

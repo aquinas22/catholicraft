@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "catholicraft:stations_of_the_cross",
+          "functions": [
+            {
+              "function": "minecraft:copy_state",
+              "block": "catholicraft:stations_of_the_cross",
+              "properties": [
+                "station"
+              ]
+            }
+          ]
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    }
+  ]
+}

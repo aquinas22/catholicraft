@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "catholicraft:block/kneeler",
+      "y": 0
+    },
+    "facing=east": {
+      "model": "catholicraft:block/kneeler",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "catholicraft:block/kneeler",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "catholicraft:block/kneeler",
+      "y": 270
+    }
+  }
+}

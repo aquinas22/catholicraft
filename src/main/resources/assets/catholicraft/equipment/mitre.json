@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "catholicraft:mitre"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "catholicraft:mitre"
+      }
+    ]
+  }
+}

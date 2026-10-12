@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PPP",
+    "PBP",
+    "P P"
+  ],
+  "key": {
+    "P": "minecraft:dark_oak_planks",
+    "B": "minecraft:bell"
+  },
+  "result": {
+    "id": "catholicraft:church_bell",
+    "count": 1
+  }
+}

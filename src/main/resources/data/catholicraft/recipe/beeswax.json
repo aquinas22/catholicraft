@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:honeycomb"
+  ],
+  "result": {
+    "id": "catholicraft:beeswax",
+    "count": 2
+  }
+}

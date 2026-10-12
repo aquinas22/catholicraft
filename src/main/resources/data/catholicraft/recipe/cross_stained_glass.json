@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "BGB",
+    "GGG",
+    "BGB"
+  ],
+  "key": {
+    "B": "minecraft:blue_stained_glass",
+    "G": "minecraft:gold_nugget"
+  },
+  "result": {
+    "id": "catholicraft:cross_stained_glass",
+    "count": 4
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PPP",
+    "S S",
+    "S S"
+  ],
+  "key": {
+    "P": "minecraft:dark_oak_slab",
+    "S": "minecraft:stick"
+  },
+  "result": {
+    "id": "catholicraft:credence_table",
+    "count": 1
+  }
+}

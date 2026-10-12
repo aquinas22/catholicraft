@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PPP",
+    " B ",
+    "PPP"
+  ],
+  "key": {
+    "P": "minecraft:dark_oak_planks",
+    "B": "minecraft:bookshelf"
+  },
+  "result": {
+    "id": "catholicraft:ambo",
+    "count": 1
+  }
+}

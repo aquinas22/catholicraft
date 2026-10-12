@@ -1,0 +1,44 @@
+plugins {
+    id 'java-library'
+    id 'net.neoforged.moddev' version '2.0.148'
+}
+
+version = mod_version
+group = 'com.catholicraft'
+base { archivesName = 'catholicraft' }
+java.toolchain.languageVersion = JavaLanguageVersion.of(25)
+sourceSets {
+    gameTest {
+        compileClasspath += sourceSets.main.output
+        runtimeClasspath += sourceSets.main.output
+    }
+}
+
+neoForge {
+    version = '26.2.0.90'
+    addModdingDependenciesTo sourceSets.gameTest
+    runs {
+        client { client(); gameDirectory = file('runs/client') }
+        server { server(); gameDirectory = file('runs/server'); programArgument '--nogui' }
+        gameTestServer {
+            type = 'gameTestServer'
+            gameDirectory = file('runs/gametest')
+            programArguments.addAll '--tests', 'catholicraft_tests:*', '--report', file('build/gametest-results.xml').absolutePath
+        }
+    }
+    mods {
+        catholicraft { sourceSet sourceSets.main }
+        catholicraft_tests { sourceSet sourceSets.gameTest }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
+tasks.named('processResources') {
+    inputs.property 'version', project.version
+    filesMatching('META-INF/neoforge.mods.toml') { expand(version: project.version) }
+}
+tasks.register('verifyResources', Exec) {
+    commandLine 'python3', 'tools/verify_resources.py'
+}
+tasks.named('check') { dependsOn 'verifyResources' }
+tasks.named('jar') { from('LICENSE') { into 'META-INF' } }

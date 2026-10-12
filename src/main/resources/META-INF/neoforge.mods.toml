@@ -1,0 +1,24 @@
+modLoader="javafml"
+loaderVersion="[11,)"
+license="MIT"
+
+[[mods]]
+modId="catholicraft"
+version="${version}"
+displayName="CatholiCraft"
+authors="CatholiCraft contributors"
+description='''Build a Catholic chapel with sacred furnishings, missals, vestments, holy water, and devotional objects.'''
+
+[[dependencies.catholicraft]]
+modId="neoforge"
+type="required"
+versionRange="[26.2.0.90,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.catholicraft]]
+modId="minecraft"
+type="required"
+versionRange="[26.2]"
+ordering="NONE"
+side="BOTH"

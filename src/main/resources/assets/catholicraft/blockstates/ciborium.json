@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "catholicraft:block/ciborium",
+      "y": 0
+    },
+    "facing=east": {
+      "model": "catholicraft:block/ciborium",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "catholicraft:block/ciborium",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "catholicraft:block/ciborium",
+      "y": 270
+    }
+  }
+}

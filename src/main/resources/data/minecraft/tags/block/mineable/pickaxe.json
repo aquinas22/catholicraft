@@ -1,0 +1,19 @@
+{
+  "replace": false,
+  "values": [
+    "catholicraft:tabernacle",
+    "catholicraft:altar",
+    "catholicraft:holy_water_font",
+    "catholicraft:baptismal_font",
+    "catholicraft:altar_candle",
+    "catholicraft:sanctuary_lamp",
+    "catholicraft:church_bell",
+    "catholicraft:chalice",
+    "catholicraft:ciborium",
+    "catholicraft:monstrance",
+    "catholicraft:votive_rack",
+    "catholicraft:incense_burner",
+    "catholicraft:our_lady_statue",
+    "catholicraft:st_joseph_statue"
+  ]
+}

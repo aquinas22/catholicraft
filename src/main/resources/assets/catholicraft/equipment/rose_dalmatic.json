@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "catholicraft:rose_dalmatic"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "catholicraft:rose_dalmatic"
+      }
+    ]
+  }
+}

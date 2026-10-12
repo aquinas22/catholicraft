@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "catholicraft:block/monstrance",
+      "y": 0
+    },
+    "facing=east": {
+      "model": "catholicraft:block/monstrance",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "catholicraft:block/monstrance",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "catholicraft:block/monstrance",
+      "y": 270
+    }
+  }
+}

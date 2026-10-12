@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:book",
+    "minecraft:green_dye",
+    "minecraft:gold_nugget"
+  ],
+  "result": {
+    "id": "catholicraft:modern_missal",
+    "count": 1
+  }
+}

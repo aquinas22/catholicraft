@@ -1,0 +1,10 @@
+.gradle/
+.gradle-user-home/
+build/
+runs/
+*.log
+__pycache__/
+.idea/
+*.iml
+releases/
+logs/

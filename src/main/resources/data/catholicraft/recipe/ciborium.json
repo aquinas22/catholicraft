@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "catholicraft:chalice",
+    "minecraft:gold_ingot",
+    "minecraft:gold_nugget"
+  ],
+  "result": {
+    "id": "catholicraft:ciborium",
+    "count": 1
+  }
+}

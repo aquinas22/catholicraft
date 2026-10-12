@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PPP",
+    "PQP",
+    "PPP"
+  ],
+  "key": {
+    "P": "minecraft:dark_oak_planks",
+    "Q": "minecraft:quartz"
+  },
+  "result": {
+    "id": "catholicraft:stations_of_the_cross",
+    "count": 4
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " S ",
+    "GCG",
+    " G "
+  ],
+  "key": {
+    "S": "minecraft:string",
+    "G": "minecraft:gold_nugget",
+    "C": "minecraft:stick"
+  },
+  "result": {
+    "id": "catholicraft:st_benedict_medal",
+    "count": 1
+  }
+}

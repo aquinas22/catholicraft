@@ -1,0 +1,13 @@
+modLoader="javafml"
+loaderVersion="[11,)"
+license="MIT"
+[[mods]]
+modId="catholicraft_tests"
+version="1.0.0"
+displayName="CatholiCraft development tests"
+[[dependencies.catholicraft_tests]]
+modId="catholicraft"
+type="required"
+versionRange="[1.0.0,)"
+ordering="AFTER"
+side="BOTH"

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "WWW",
+    "WGW",
+    " D "
+  ],
+  "key": {
+    "W": "minecraft:white_wool",
+    "G": "minecraft:gold_nugget",
+    "D": "minecraft:purple_dye"
+  },
+  "result": {
+    "id": "catholicraft:violet_dalmatic",
+    "count": 1
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "variants": {
+    "facing=north,water=0": {
+      "model": "catholicraft:block/holy_water_font",
+      "y": 0
+    },
+    "facing=north,water=1": {
+      "model": "catholicraft:block/holy_water_font_1",
+      "y": 0
+    },
+    "facing=north,water=2": {
+      "model": "catholicraft:block/holy_water_font_2",
+      "y": 0
+    },
+    "facing=north,water=3": {
+      "model": "catholicraft:block/holy_water_font_3",
+      "y": 0
+    },
+    "facing=east,water=0": {
+      "model": "catholicraft:block/holy_water_font",
+      "y": 90
+    },
+    "facing=east,water=1": {
+      "model": "catholicraft:block/holy_water_font_1",
+      "y": 90
+    },
+    "facing=east,water=2": {
+      "model": "catholicraft:block/holy_water_font_2",
+      "y": 90
+    },
+    "facing=east,water=3": {
+      "model": "catholicraft:block/holy_water_font_3",
+      "y": 90
+    },
+    "facing=south,water=0": {
+      "model": "catholicraft:block/holy_water_font",
+      "y": 180
+    },
+    "facing=south,water=1": {
+      "model": "catholicraft:block/holy_water_font_1",
+      "y": 180
+    },
+    "facing=south,water=2": {
+      "model": "catholicraft:block/holy_water_font_2",
+      "y": 180
+    },
+    "facing=south,water=3": {
+      "model": "catholicraft:block/holy_water_font_3",
+      "y": 180
+    },
+    "facing=west,water=0": {
+      "model": "catholicraft:block/holy_water_font",
+      "y": 270
+    },
+    "facing=west,water=1": {
+      "model": "catholicraft:block/holy_water_font_1",
+      "y": 270
+    },
+    "facing=west,water=2": {
+      "model": "catholicraft:block/holy_water_font_2",
+      "y": 270
+    },
+    "facing=west,water=3": {
+      "model": "catholicraft:block/holy_water_font_3",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:book",
+    "minecraft:blue_dye",
+    "minecraft:gold_nugget"
+  ],
+  "result": {
+    "id": "catholicraft:prayer_book",
+    "count": 1
+  }
+}
