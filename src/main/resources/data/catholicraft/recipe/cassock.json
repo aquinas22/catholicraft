@@ -1,16 +1,19 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "pattern": [
-    "B B",
-    "BBB",
-    "BBB"
-  ],
-  "key": {
-    "B": "minecraft:black_wool"
-  },
-  "result": {
-    "id": "catholicraft:cassock",
-    "count": 1
+  "type": "catholicraft:workbench",
+  "recipe": {
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "pattern": [
+      "B B",
+      "BBB",
+      "BBB"
+    ],
+    "key": {
+      "B": "minecraft:black_wool"
+    },
+    "result": {
+      "id": "catholicraft:cassock",
+      "count": 1
+    }
   }
 }

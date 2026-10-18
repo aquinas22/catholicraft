@@ -1,0 +1,125 @@
+[
+  {
+    "id": "annunciation",
+    "title": "Fra Angelico — Annunciation of Cortona (1433–1434)",
+    "creator": "Fra Angelico / The Yorck Project",
+    "license": "PD-art",
+    "rights": "Faithful reproduction of a public-domain painting; the individual image and depicted work are public domain. The Yorck compilation is separately licensed.",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Fra_Angelico_069.jpg",
+    "download_url": "https://upload.wikimedia.org/wikipedia/commons/9/96/Fra_Angelico_069.jpg",
+    "verified_on": "2026-10-11",
+    "source_sha256": null,
+    "asset": "assets/catholicraft/textures/block/art_annunciation.png",
+    "asset_sha256": "29e35a69cd9217fe914c51f2e9264660fc6844ab258b61aafd365f44935d362c",
+    "changes": "Full image reduced to fit a 256×256 texture, preserving aspect ratio with a dark mat; no painting content cropped."
+  },
+  {
+    "id": "sistine_madonna",
+    "title": "Raphael — Sistine Madonna (1512–1513)",
+    "creator": "Raphael / The Yorck Project",
+    "license": "PD-art",
+    "rights": "Faithful reproduction of a public-domain painting; Commons marks the individual image PD-art / Public Domain Mark 1.0.",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Raffael_051.jpg",
+    "download_url": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Raffael_051.jpg",
+    "verified_on": "2026-10-11",
+    "source_sha256": null,
+    "asset": "assets/catholicraft/textures/block/art_sistine_madonna.png",
+    "asset_sha256": "81b042725de7430d4a0b04db8346beeb06b2a5d614e5529ef5ec1c704e3f2a98",
+    "changes": "Full image reduced to fit a 256×256 texture, preserving aspect ratio with a dark mat; no painting content cropped."
+  },
+  {
+    "id": "last_supper",
+    "title": "Leonardo da Vinci — The Last Supper (1495–1498)",
+    "creator": "Leonardo da Vinci",
+    "license": "PD-art",
+    "rights": "Faithful reproduction of a public-domain painting; Commons marks the individual image PD-art / Public Domain Mark 1.0.",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Leonardo_da_Vinci_(1452-1519)_-_The_Last_Supper_(1495-1498).jpg",
+    "download_url": "https://upload.wikimedia.org/wikipedia/commons/0/08/Leonardo_da_Vinci_%281452-1519%29_-_The_Last_Supper_%281495-1498%29.jpg",
+    "verified_on": "2026-10-11",
+    "source_sha256": null,
+    "asset": "assets/catholicraft/textures/block/art_last_supper.png",
+    "asset_sha256": "9516f4d276e878a850e8983d0eb4e1cfdb315da3b0051dbae914e15ae20f3d22",
+    "changes": "Full image reduced to fit a 256×256 texture, preserving aspect ratio with a dark mat; no painting content cropped."
+  },
+  {
+    "id": "veni_creator",
+    "title": "Veni Creator Spiritus",
+    "creator": "Membeth",
+    "license": "PD-self",
+    "rights": "The performer and recording copyright holder released this recording into the public domain worldwide, with an unconditional fallback permission.",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Veni.creator.spiritus.ogg",
+    "download_url": "https://upload.wikimedia.org/wikipedia/commons/0/01/Veni.creator.spiritus.ogg",
+    "verified_on": "2026-10-11",
+    "source_sha256": null,
+    "asset": "assets/catholicraft/sounds/chant/veni_creator.ogg",
+    "asset_sha256": "84d2f4e54b0379d9f72062725ae9e0a320d1ce58ab67cc9448fec64fe0d32a89",
+    "changes": "Entire recording converted to mono 44.1 kHz Ogg Vorbis for positional Minecraft jukebox playback; no excerpt or synthesized replacement.",
+    "audio": {
+      "programs": [],
+      "streams": [
+        {
+          "codec_name": "vorbis",
+          "sample_rate": "44100",
+          "channels": 1
+        }
+      ],
+      "format": {
+        "duration": "30.285714"
+      }
+    }
+  },
+  {
+    "id": "veni_sancte",
+    "title": "Veni Sancte Spiritus",
+    "creator": "Membeth",
+    "license": "PD-self",
+    "rights": "The performer and recording copyright holder released this recording into the public domain worldwide, with an unconditional fallback permission.",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Veni.sancte.spiritus.ogg",
+    "download_url": "https://upload.wikimedia.org/wikipedia/commons/9/96/Veni.sancte.spiritus.ogg",
+    "verified_on": "2026-10-11",
+    "source_sha256": null,
+    "asset": "assets/catholicraft/sounds/chant/veni_sancte.ogg",
+    "asset_sha256": "2c4590fc469fbb02feb2ad667a160d069f96bed4b86863bd64595089c6322c13",
+    "changes": "Entire recording converted to mono 44.1 kHz Ogg Vorbis for positional Minecraft jukebox playback; no excerpt or synthesized replacement.",
+    "audio": {
+      "programs": [],
+      "streams": [
+        {
+          "codec_name": "vorbis",
+          "sample_rate": "44100",
+          "channels": 1
+        }
+      ],
+      "format": {
+        "duration": "157.280635"
+      }
+    }
+  },
+  {
+    "id": "dies_irae",
+    "title": "Dies Irae",
+    "creator": "Membeth",
+    "license": "PD-self",
+    "rights": "The performer and recording copyright holder released this recording into the public domain worldwide, with an unconditional fallback permission.",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Dies.irae.ogg",
+    "download_url": "https://upload.wikimedia.org/wikipedia/commons/f/f2/Dies.irae.ogg",
+    "verified_on": "2026-10-11",
+    "source_sha256": "a94c57586d3215a4ecb67a5eb9701b387be39bef2f53abaae3b2214a2e9472e6",
+    "asset": "assets/catholicraft/sounds/chant/dies_irae.ogg",
+    "asset_sha256": "ef1127a31e71d3f528497ae576a75bec1db1f2cd65cf0b7e7e355a2e4116f098",
+    "changes": "Entire recording converted to mono 44.1 kHz Ogg Vorbis for positional Minecraft jukebox playback; no excerpt or synthesized replacement.",
+    "audio": {
+      "programs": [],
+      "streams": [
+        {
+          "codec_name": "vorbis",
+          "sample_rate": "44100",
+          "channels": 1
+        }
+      ],
+      "format": {
+        "duration": "434.000952"
+      }
+    }
+  }
+]

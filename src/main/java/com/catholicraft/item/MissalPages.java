@@ -43,7 +43,13 @@ public final class MissalPages {
         "PEWS AND STORAGE\n\nUse an empty hand on a pew to sit. Sneak to leave the seat.\n\nThe sacristy cabinet has 27 slots for chapel supplies. Its doors work like the tabernacle's.",
         "STATIONS OF THE CROSS\n\nUse a station plaque to select I through XIV. Sneak-use selects the previous station.\n\nCraft a Stations companion for short original reflections on all fourteen stations.",
         "MORE VESTMENTS\n\nDalmatics come in six liturgical colors. A cassock and surplice add more clothing choices.\n\nEach uses the chest slot. Use an armor stand to display a complete set.",
-        "DEVOTIONAL CORNER\n\nAdd statues of Our Lady and St. Joseph, a votive rack, and a prayer book.\n\nCarry a scapular or processional cross in the off hand. Use the altar bell for a soft chime.");
+        "DEVOTIONAL CORNER\n\nAdd statues of Our Lady and St. Joseph, a votive rack, and a prayer book.\n\nCarry a scapular or processional cross in the off hand. Use the altar bell for a soft chime.",
+        "MASS PREPARATION\n\nWear an alb and chasuble.\n\nNear the altar: crucifix, chalice, two lit candles, and an ambo or lectern.\n\nBring altar bread and a wine cruet.\nCruet recipe: bottle, berries, sugar.",
+        "CELEBRATING IN GAME\n\nUse a missal ON the altar: 1962 selects the traditional order; modern selects the modern order.\n\nUse again for each step. Nearby players see the guidance. Sneak-use ends your session. Empty hand shows status.",
+        "GIFTS AND MEMORY\n\nOffertory uses one bread and one wine cruet, returning the bottle. Missing gifts use nothing.\n\nProgress survives saving. The player who began the service leads it. The liturgy is represented in roleplay.",
+        "GREGORIAN CHANT\n\nThree full recordings: Veni Creator Spiritus, Veni Sancte Spiritus, and Dies Irae.\n\nPlay their discs in a jukebox. Eject to stop. The cathedral cabinet has all three. The performer released them to the public domain.",
+        "SACRED ART AND MONKS\n\nCraft framed paintings by Fra Angelico, Raphael and Leonardo. Use a painting for its credit.\n\nMonks sell supplies for one emerald. Sneak-use a monk to choose a supply, then use an emerald to buy it.",
+        "FIND A CATHEDRAL\n\nCathedrals appear in new temperate Overworld chunks, with three monks and stocked sacristies.\n\nOperators can use:\n/locate structure catholicraft:cathedral\n/catholicraft cathedral\n/catholicraft monk");
 
     private static WrittenBookContent book(String title, String... pages) {
         return new WrittenBookContent(Filterable.passThrough(title), "CatholiCraft", 0,

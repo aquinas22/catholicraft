@@ -1,16 +1,19 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "pattern": [
-    "Q Q",
-    " Q ",
-    "QQQ"
-  ],
-  "key": {
-    "Q": "minecraft:quartz_block"
-  },
-  "result": {
-    "id": "catholicraft:holy_water_font",
-    "count": 1
+  "type": "catholicraft:workbench",
+  "recipe": {
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "pattern": [
+      "Q Q",
+      " Q ",
+      "QQQ"
+    ],
+    "key": {
+      "Q": "minecraft:quartz_block"
+    },
+    "result": {
+      "id": "catholicraft:holy_water_font",
+      "count": 1
+    }
   }
 }

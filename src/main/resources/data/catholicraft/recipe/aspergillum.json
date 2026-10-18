@@ -1,17 +1,20 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "pattern": [
-    " I ",
-    " S ",
-    " S "
-  ],
-  "key": {
-    "I": "minecraft:iron_ingot",
-    "S": "minecraft:stick"
-  },
-  "result": {
-    "id": "catholicraft:aspergillum",
-    "count": 1
+  "type": "catholicraft:workbench",
+  "recipe": {
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "pattern": [
+      " I ",
+      " S ",
+      " S "
+    ],
+    "key": {
+      "I": "minecraft:iron_ingot",
+      "S": "minecraft:stick"
+    },
+    "result": {
+      "id": "catholicraft:aspergillum",
+      "count": 1
+    }
   }
 }

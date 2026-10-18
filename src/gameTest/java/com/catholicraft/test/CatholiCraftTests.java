@@ -1,6 +1,9 @@
 package com.catholicraft.test;
 
 import com.catholicraft.CatholiCraft;
+import com.catholicraft.block.MassAltarBlockEntity;
+import com.catholicraft.entity.MonkEntity;
+import com.catholicraft.world.CathedralCommands;
 import com.catholicraft.block.ChapelBlock;
 import com.catholicraft.block.TabernacleBlock;
 import com.catholicraft.block.IncenseBurnerBlock;
@@ -59,6 +62,7 @@ public final class CatholiCraftTests {
 
     private static void register(RegisterGameTestsEvent e) {
         var environment = e.registerEnvironment(id("default"));
+        expandedTests(e,environment);
         test(e, "tabernacle_save_load", h -> {
             h.setBlock(POS, ModContent.TABERNACLE.get());
             var tab = h.getBlockEntity(POS, TabernacleBlockEntity.class);
@@ -195,6 +199,7 @@ public final class CatholiCraftTests {
             h.succeed();
         }, new TestData<>(environment, id("empty"), 100, 1, true));
         test(e, "all_survival_recipes_craft", CatholiCraftTests::recipes, new TestData<>(environment,id("empty"),100,1,true));
+        test(e, "st_josephs_workbench_crafts_without_clashes", CatholiCraftTests::workbench, new TestData<>(environment,id("empty"),100,1,true));
         test(e, "chapel_blueprint_places", h -> {
             var origin=h.absolutePos(BlockPos.ZERO);
             h.assertTrue(ChapelCommands.firstObstruction(h.getLevel(),origin).isEmpty(),"An empty volume is accepted");
@@ -333,6 +338,174 @@ public final class CatholiCraftTests {
         },new TestData<>(environment,id("empty"),100,1,true));
     }
 
+    private static void expandedTests(RegisterGameTestsEvent e, net.minecraft.core.Holder<net.minecraft.gametest.framework.TestEnvironmentDefinition<?>> environment) {
+        test(e,"modern_mass_complete",h -> massSequence(h,false),new TestData<>(environment,id("empty_chapel"),250,1,true));
+        test(e,"traditional_mass_complete",h -> massSequence(h,true),new TestData<>(environment,id("empty_chapel"),250,1,true));
+        test(e,"mass_preparation_ownership_and_gifts",h -> {
+            ChapelCommands.place(h.getLevel(),h.absolutePos(BlockPos.ZERO));
+            var pos=new BlockPos(12,1,5);
+            var altar=h.getBlockEntity(pos,MassAltarBlockEntity.class);
+            var player=h.makeMockPlayer(GameType.SURVIVAL);
+            altar.interact(player,new ItemStack(ModContent.MODERN_MISSAL.get()));
+            h.assertTrue(!altar.isActive(),"Preparation required before service begins");
+            equipCelebrant(player);
+            altar.interact(player,new ItemStack(ModContent.MODERN_MISSAL.get()));
+            h.assertValueEqual(altar.stepIndex(),0,"Entrance begins after preparation");
+            var visitor=h.makeMockPlayer(GameType.SURVIVAL);visitor.setUUID(java.util.UUID.randomUUID());equipCelebrant(visitor);
+            visitor.setShiftKeyDown(true);altar.interact(visitor,new ItemStack(ModContent.MODERN_MISSAL.get()));
+            h.assertTrue(altar.isActive(),"Visitor cannot cancel another celebrant's service");
+            for(int i=1;i<=5;i++) {
+                final int expected=i;
+                h.runAfterDelay(i*10,() -> {altar.interact(player,new ItemStack(ModContent.MODERN_MISSAL.get()));h.assertValueEqual(altar.stepIndex(),expected,"Advance through introductory rites and Word");});
+            }
+            h.runAfterDelay(60,() -> {
+                player.getInventory().add(new ItemStack(ModContent.ALTAR_BREAD.get(),2));
+                altar.interact(player,new ItemStack(ModContent.MODERN_MISSAL.get()));
+                h.assertValueEqual(altar.stepIndex(),5,"Wine is required before advancing");
+                h.assertValueEqual(player.getInventory().countItem(ModContent.ALTAR_BREAD.get()),2,"Failed offertory must consume no bread");
+                player.getInventory().add(new ItemStack(ModContent.WINE_CRUET.get(),2));
+                altar.interact(player,new ItemStack(ModContent.MODERN_MISSAL.get()));
+                h.assertValueEqual(altar.stepIndex(),6,"Offertory advances when both gifts exist");
+                h.assertValueEqual(player.getInventory().countItem(ModContent.ALTAR_BREAD.get()),1,"One bread consumed");
+                h.assertValueEqual(player.getInventory().countItem(ModContent.WINE_CRUET.get()),1,"One wine cruet consumed");
+                h.assertValueEqual(player.getInventory().countItem(Items.GLASS_BOTTLE),1,"Bottle returned");
+                altar.interact(player,new ItemStack(ModContent.MODERN_MISSAL.get()));
+                h.assertValueEqual(altar.stepIndex(),6,"Repeated click is debounced");
+                var saved=altar.saveWithFullMetadata(h.getLevel().registryAccess());
+                var loaded=(MassAltarBlockEntity)BlockEntity.loadStatic(h.absolutePos(pos),h.getBlockState(pos),saved,h.getLevel().registryAccess());
+                h.assertTrue(loaded!=null && loaded.stepIndex()==6 && !loaded.isTraditional(),"Mass position and order persist");
+                player.setShiftKeyDown(true);altar.interact(player,new ItemStack(ModContent.MODERN_MISSAL.get()));
+                h.assertTrue(!altar.isActive(),"Celebrant can end the service");
+                h.succeed();
+            });
+        },new TestData<>(environment,id("empty_chapel"),120,1,true));
+        test(e,"chant_jukebox_playback_and_persistence",h -> {
+            h.setBlock(POS,Blocks.JUKEBOX);
+            var box=h.getBlockEntity(POS,net.minecraft.world.level.block.entity.JukeboxBlockEntity.class);
+            for(var record:List.of(ModContent.CHANT_VENI_CREATOR,ModContent.CHANT_VENI_SANCTE,ModContent.CHANT_DIES_IRAE)) {
+                var disc=new ItemStack(record.get());
+                var song=net.minecraft.world.item.JukeboxSong.fromStack(disc).orElseThrow();
+                h.assertTrue(song.value().lengthInSeconds()>25,"Full chant duration registered");
+                box.setTheItem(disc);h.assertTrue(box.getSongPlayer().isPlaying(),"Chant plays through vanilla jukebox");
+                var tag=box.saveWithFullMetadata(h.getLevel().registryAccess());
+                var loaded=(net.minecraft.world.level.block.entity.JukeboxBlockEntity)BlockEntity.loadStatic(h.absolutePos(POS),h.getBlockState(POS),tag,h.getLevel().registryAccess());
+                h.assertTrue(loaded!=null && loaded.getTheItem().is(record.get()),"Jukebox disc survives save/load");
+                box.setTheItem(ItemStack.EMPTY);
+            }
+            h.succeed();
+        },new TestData<>(environment,id("empty"),100,1,true));
+        test(e,"monk_trade_and_save",h -> {
+            var monk=h.spawnWithNoFreeWill(ModContent.MONK.get(),POS);
+            var player=h.makeMockPlayer(GameType.SURVIVAL);
+            player.setItemInHand(InteractionHand.MAIN_HAND,new ItemStack(Items.EMERALD,2));
+            monk.interact(player,InteractionHand.MAIN_HAND,net.minecraft.world.phys.Vec3.ZERO);
+            h.assertValueEqual(player.getInventory().countItem(ModContent.PRAYER_BOOK.get()),1,"Monk supplies prayer book");
+            h.assertValueEqual(player.getItemInHand(InteractionHand.MAIN_HAND).getCount(),1,"One emerald used");
+            monk.interact(player,InteractionHand.MAIN_HAND,net.minecraft.world.phys.Vec3.ZERO);
+            h.assertValueEqual(player.getInventory().countItem(ModContent.PRAYER_BOOK.get()),1,"Trade cooldown prevents repeated transaction");
+            player.setShiftKeyDown(true);monk.interact(player,InteractionHand.MAIN_HAND,net.minecraft.world.phys.Vec3.ZERO);
+            h.assertTrue(monk.currentOffer().is(ModContent.INCENSE.get()) && monk.currentOffer().getCount()==8,"Sneak selects next supply");
+            var out=net.minecraft.world.level.storage.TagValueOutput.createWithContext(net.minecraft.util.ProblemReporter.DISCARDING,h.getLevel().registryAccess());
+            monk.saveWithoutId(out);
+            var copy=ModContent.MONK.get().create(h.getLevel(),net.minecraft.world.entity.EntitySpawnReason.LOAD);
+            copy.load(net.minecraft.world.level.storage.TagValueInput.create(net.minecraft.util.ProblemReporter.DISCARDING,h.getLevel().registryAccess(),out.buildResult()));
+            h.assertTrue(copy.currentOffer().is(ModContent.INCENSE.get()),"Monk offer persists");
+            h.assertTrue(!copy.removeWhenFarAway(100000),"Resident does not despawn");h.succeed();
+        },new TestData<>(environment,id("empty"),100,1,true));
+        test(e,"cathedral_furnished_template",h -> {
+            var origin=h.absolutePos(new BlockPos(1,1,1));
+            h.assertTrue(CathedralCommands.firstObstruction(h.getLevel(),origin).isEmpty(),"Clear cathedral volume accepted");
+            h.assertTrue(CathedralCommands.place(h.getLevel(),origin),"Full cathedral template placed");
+            h.assertTrue(h.getLevel().getBlockEntity(origin.offset(34,2,14)) instanceof MassAltarBlockEntity,"Sanctuary has functional Mass altar");
+            var cabinet=(TabernacleBlockEntity)h.getLevel().getBlockEntity(origin.offset(25,1,25));
+            h.assertTrue(cabinet!=null && cabinet.getItem(5).is(ModContent.ALTAR_BREAD.get()),"Sacristy stocks offertory bread");
+            h.assertTrue(cabinet.getItem(6).is(ModContent.WINE_CRUET.get()),"Sacristy stocks wine cruets");
+            h.assertTrue(cabinet.getItem(10).is(ModContent.CHANT_DIES_IRAE.get()),"Sacristy stocks all three chant discs");
+            h.assertValueEqual(h.getLevel().getEntitiesOfClass(MonkEntity.class,new AABB(origin.getX(),origin.getY(),origin.getZ(),origin.getX()+41,origin.getY()+25,origin.getZ()+29)).size(),3,"Three resident monks spawn");
+            h.assertTrue(h.getLevel().getBlockState(origin.offset(3,19,14)).is(Blocks.GOLD_BLOCK),"Facade cross exists");h.succeed();
+        },new TestData<>(environment,id("empty_cathedral"),100,1,true));
+        test(e,"cathedral_obstruction_is_atomic",h -> {
+            var origin=h.absolutePos(new BlockPos(1,1,1));
+            var obstruction=origin.offset(20,10,14);h.getLevel().setBlock(obstruction,Blocks.DIAMOND_BLOCK.defaultBlockState(),3);
+            h.assertTrue(CathedralCommands.firstObstruction(h.getLevel(),origin).isPresent(),"Interior obstruction rejected before construction");
+            h.assertTrue(h.getLevel().isEmptyBlock(origin),"Preflight changes no floor block");
+            h.assertTrue(h.getLevel().getBlockState(obstruction).is(Blocks.DIAMOND_BLOCK),"Existing block preserved");h.succeed();
+        },new TestData<>(environment,id("empty_cathedral"),100,1,true));
+        test(e,"cathedral_worldgen_start",h -> {
+            var level=h.getLevel();var lookup=level.registryAccess().lookupOrThrow(Registries.STRUCTURE);
+            var holder=lookup.getOrThrow(ResourceKey.create(Registries.STRUCTURE,CatholiCraft.id("cathedral")));
+            var set=level.registryAccess().lookupOrThrow(Registries.STRUCTURE_SET).getOrThrow(ResourceKey.create(Registries.STRUCTURE_SET,CatholiCraft.id("cathedrals"))).value();
+            h.assertTrue(set.placement() instanceof net.minecraft.world.level.levelgen.structure.placement.RandomSpreadStructurePlacement,"Natural random-spread generation is configured");
+            h.assertTrue(set.structures().getFirst().structure().equals(holder),"Structure set points to cathedral");
+            var generator=level.getChunkSource().getGenerator();
+            var start=holder.value().generate(holder,level.dimension(),level.registryAccess(),generator,generator.getBiomeSource(),level.getChunkSource().randomState(),level.getStructureManager(),level.getSeed(),new net.minecraft.world.level.ChunkPos(h.absolutePos(POS).getX()>>4,h.absolutePos(POS).getZ()>>4),0,level,biome -> true);
+            h.assertTrue(start.isValid() && !start.getPieces().isEmpty(),"Vanilla jigsaw generator produces a cathedral start");
+            h.assertTrue(start.getBoundingBox().getYSpan()>=25,"Full tower height included in natural start");h.succeed();
+        },new TestData<>(environment,id("empty"),100,1,true));
+    }
+    private static void equipCelebrant(net.minecraft.world.entity.player.Player player) {
+        player.setItemSlot(EquipmentSlot.CHEST,new ItemStack(ModContent.WHITE_CHASUBLE.get()));
+        player.setItemSlot(EquipmentSlot.LEGS,new ItemStack(ModContent.ALB.get()));
+    }
+    private static void massSequence(GameTestHelper h,boolean traditional) {
+        ChapelCommands.place(h.getLevel(),h.absolutePos(BlockPos.ZERO));
+        var player=h.makeMockPlayer(GameType.SURVIVAL);equipCelebrant(player);
+        var pos=new BlockPos(12,1,5);var altar=h.getBlockEntity(pos,MassAltarBlockEntity.class);
+        var missal=new ItemStack(traditional?ModContent.MISSAL_1962.get():ModContent.MODERN_MISSAL.get());
+        player.setItemInHand(InteractionHand.MAIN_HAND,missal);
+        player.getInventory().add(new ItemStack(ModContent.ALTAR_BREAD.get(),2));player.getInventory().add(new ItemStack(ModContent.WINE_CRUET.get(),2));
+        h.useBlock(pos,player);
+        h.assertValueEqual(altar.stepIndex(),0,"Missal on altar starts the service");
+        h.assertTrue(altar.isTraditional()==traditional,"Correct Mass order selected");
+        int count=traditional?MassAltarBlockEntity.TRADITIONAL.length:MassAltarBlockEntity.MODERN.length;
+        for(int i=1;i<=count;i++) {
+            final int expected=i;
+            h.runAfterDelay(i*10,() -> {
+                h.useBlock(pos,player);
+                if(expected<count) h.assertValueEqual(altar.stepIndex(),expected,"Every Mass step reached in order");
+                else {
+                    h.assertTrue(!altar.isActive(),"Complete Mass returns altar to ready state");
+                    h.assertValueEqual(player.getInventory().countItem(ModContent.ALTAR_BREAD.get()),1,"Bread consumed once in full service");
+                    h.assertValueEqual(player.getInventory().countItem(ModContent.WINE_CRUET.get()),1,"Wine consumed once in full service");h.succeed();
+                }
+            });
+        }
+    }
+
+    /**
+     * The iron-shovel shape is an iron shovel at a crafting table and an aspergillum at St. Joseph's Workbench;
+     * taking the result uses exactly one of each ingredient; vanilla recipes do nothing at the workbench.
+     */
+    private static void workbench(GameTestHelper h) {
+        var level=h.getLevel();
+        List<ItemStack> grid=new ArrayList<>(Collections.nCopies(9,ItemStack.EMPTY));
+        grid.set(1,new ItemStack(Items.IRON_INGOT)); grid.set(4,new ItemStack(Items.STICK)); grid.set(7,new ItemStack(Items.STICK));
+        var input=CraftingInput.of(3,3,grid);
+        var table=level.recipeAccess().getRecipeFor(net.minecraft.world.item.crafting.RecipeType.CRAFTING,input,level).orElseThrow(() -> new AssertionError("No crafting-table recipe for the shovel shape"));
+        h.assertTrue(table.value().assemble(input).is(Items.IRON_SHOVEL),"The crafting table makes an iron shovel, not "+table.value().assemble(input));
+        h.setBlock(new BlockPos(1,1,1),ModContent.ST_JOSEPHS_WORKBENCH.get());
+        @SuppressWarnings("removal") var player=h.makeMockServerPlayerInLevel();
+        player.setGameMode(GameType.SURVIVAL);
+        player.getInventory().clearContent();
+        var menu=new com.catholicraft.workbench.WorkbenchMenu(7,player.getInventory(),net.minecraft.world.inventory.ContainerLevelAccess.create(level,h.absolutePos(new BlockPos(1,1,1))));
+        menu.getSlot(2).set(new ItemStack(Items.IRON_INGOT,2));
+        menu.getSlot(5).set(new ItemStack(Items.STICK,3));
+        menu.getSlot(8).set(new ItemStack(Items.STICK,3));
+        menu.slotsChanged(null);
+        var made=menu.getSlot(0).getItem().copy();
+        h.assertTrue(made.is(ModContent.ITEMS.getEntries().stream().filter(i -> i.getId().getPath().equals("aspergillum")).findFirst().orElseThrow().get()),
+                "The workbench makes an aspergillum, not "+made);
+        menu.getSlot(0).onTake(player,made);
+        h.assertValueEqual(menu.getSlot(2).getItem().getCount(),1,"iron left after one craft");
+        h.assertValueEqual(menu.getSlot(5).getItem().getCount(),2,"sticks left in the middle row");
+        h.assertValueEqual(menu.getSlot(8).getItem().getCount(),2,"sticks left in the bottom row");
+        for (int i=1;i<10;i++) menu.getSlot(i).set(ItemStack.EMPTY);
+        menu.getSlot(2).set(new ItemStack(Items.OAK_PLANKS)); menu.getSlot(5).set(new ItemStack(Items.OAK_PLANKS));
+        menu.slotsChanged(null);
+        h.assertTrue(menu.getSlot(0).getItem().isEmpty(),"vanilla sticks were craftable at the workbench");
+        h.succeed();
+    }
+
     private static void recipes(GameTestHelper h) {
         int count=0;
         for (var holder:ModContent.ITEMS.getEntries()) {
@@ -342,6 +515,8 @@ public final class CatholiCraftTests {
             var recipe=h.getLevel().getServer().getRecipeManager().byKey(key).orElseThrow(() -> new AssertionError("Missing recipe "+name)).value();
             try(var stream=CatholiCraft.class.getResourceAsStream("/data/catholicraft/recipe/"+name+".json")) {
                 var json=JsonParser.parseReader(new InputStreamReader(stream,StandardCharsets.UTF_8)).getAsJsonObject();
+                // Workbench recipes wrap an ordinary crafting recipe.
+                if(json.has("recipe")) json=json.getAsJsonObject("recipe");
                 List<ItemStack> grid=new ArrayList<>(Collections.nCopies(9,ItemStack.EMPTY));
                 if(json.has("pattern")) {
                     var pattern=json.getAsJsonArray("pattern");
@@ -363,7 +538,7 @@ public final class CatholiCraftTests {
                 count++;
             } catch(Exception ex) { throw new RuntimeException(name,ex); }
         }
-        h.assertValueEqual(count,64,"All survival recipes tested");
+        h.assertValueEqual(count,72,"All survival recipes tested");
         h.succeed();
     }
 

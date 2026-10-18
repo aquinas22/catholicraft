@@ -1,18 +1,21 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "pattern": [
-    " C ",
-    " N ",
-    "GGG"
-  ],
-  "key": {
-    "C": "minecraft:candle",
-    "N": "minecraft:gold_nugget",
-    "G": "minecraft:gold_ingot"
-  },
-  "result": {
-    "id": "catholicraft:altar_candle",
-    "count": 1
+  "type": "catholicraft:workbench",
+  "recipe": {
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "pattern": [
+      " C ",
+      " N ",
+      "GGG"
+    ],
+    "key": {
+      "C": "minecraft:candle",
+      "N": "minecraft:gold_nugget",
+      "G": "minecraft:gold_ingot"
+    },
+    "result": {
+      "id": "catholicraft:altar_candle",
+      "count": 1
+    }
   }
 }

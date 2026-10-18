@@ -41,4 +41,4 @@ tasks.register('verifyResources', Exec) {
     commandLine 'python3', 'tools/verify_resources.py'
 }
 tasks.named('check') { dependsOn 'verifyResources' }
-tasks.named('jar') { from('LICENSE') { into 'META-INF' } }
+tasks.named('jar') { from(['LICENSE', 'THIRD_PARTY_ASSETS.md']) { into 'META-INF' } }

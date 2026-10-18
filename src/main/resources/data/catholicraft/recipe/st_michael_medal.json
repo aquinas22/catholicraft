@@ -1,18 +1,21 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "pattern": [
-    " S ",
-    "GCG",
-    " G "
-  ],
-  "key": {
-    "S": "minecraft:string",
-    "G": "minecraft:gold_nugget",
-    "C": "minecraft:iron_nugget"
-  },
-  "result": {
-    "id": "catholicraft:st_michael_medal",
-    "count": 1
+  "type": "catholicraft:workbench",
+  "recipe": {
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "pattern": [
+      " S ",
+      "GCG",
+      " G "
+    ],
+    "key": {
+      "S": "minecraft:string",
+      "G": "minecraft:gold_nugget",
+      "C": "minecraft:iron_nugget"
+    },
+    "result": {
+      "id": "catholicraft:st_michael_medal",
+      "count": 1
+    }
   }
 }

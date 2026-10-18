@@ -1,17 +1,20 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "pattern": [
-    " G ",
-    "WGW",
-    "WWW"
-  ],
-  "key": {
-    "W": "minecraft:white_wool",
-    "G": "minecraft:gold_nugget"
-  },
-  "result": {
-    "id": "catholicraft:mitre",
-    "count": 1
+  "type": "catholicraft:workbench",
+  "recipe": {
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "pattern": [
+      " G ",
+      "WGW",
+      "WWW"
+    ],
+    "key": {
+      "W": "minecraft:white_wool",
+      "G": "minecraft:gold_nugget"
+    },
+    "result": {
+      "id": "catholicraft:mitre",
+      "count": 1
+    }
   }
 }

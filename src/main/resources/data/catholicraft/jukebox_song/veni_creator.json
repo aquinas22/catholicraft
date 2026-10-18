@@ -1,0 +1,8 @@
+{
+  "sound_event": "catholicraft:chant.veni_creator",
+  "description": {
+    "translate": "song.catholicraft.veni_creator"
+  },
+  "length_in_seconds": 30.285714,
+  "comparator_output": 5
+}

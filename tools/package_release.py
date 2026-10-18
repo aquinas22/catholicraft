@@ -42,6 +42,15 @@ def main():
         raise SystemExit('Run the native client asset and font validation successfully before packaging.')
     if (ROOT/'build/client-validation.log').stat().st_mtime_ns<jar.stat().st_mtime_ns:
         raise SystemExit('Client validation predates the release build.')
+    graphical_report=ROOT/'build/graphical-validation.json'
+    graphical_passed=False
+    if graphical_report.is_file():
+        graphics=json.loads(graphical_report.read_text())
+        if graphics.get('release_jar_sha256')!=digest(jar.read_bytes()): raise SystemExit('Graphical validation must match the current release JAR.')
+        for name,checksum in graphics.get('screenshots',{}).items():
+            picture=ROOT/name
+            if not picture.is_file() or digest(picture.read_bytes())!=checksum: raise SystemExit('Graphical screenshot changed: '+name)
+        graphical_passed=True
     catalog=json.loads((ROOT/'content.json').read_text())
     files={}
     files[f'mods/catholicraft-{version}.jar']=jar.read_bytes()
@@ -58,8 +67,14 @@ Minecraft Java Edition 26.2 / NeoForge 26.2.0.90 / Java 25
 Cheat/operator commands:
   /catholicraft kit
   /catholicraft chapel
+  /catholicraft cathedral
+  /catholicraft monk
+  /locate structure catholicraft:cathedral
 
 The chapel builder needs a clear 15 x 11 x 8 volume east of the player.
+The cathedral builder needs a clear 41 x 25 x 29 volume.
+Prepare an alb and chasuble, then use a missal on the furnished altar.
+Use chant discs in a jukebox; monk supplies cost one emerald.
 The included README explains survival crafting and all interactions.
 
 For a server, install the same mod on the server and every connecting client.
@@ -70,13 +85,14 @@ is ./gradlew build (Java 25; network access needed for the first standard build)
 Development tests and cached Minecraft dependencies are not bundled in the
 playable JAR.
 
-Automated validation passes. Graphical playtesting was unavailable in the
-build environment. The missals are introductory companions, with original
+Automated validation passes. A local graphical smoke test verified the cathedral,
+statues, paintings and monk renderer. The virtual display used dummy audio;
+the recordings decode and play through the vanilla jukebox. The missals are introductory companions, with original
 explanatory text; the prayer book also includes historic Latin prayers.
 '''.encode()
-    for name in ('README.md','LICENSE','CHANGELOG.md','content.json'):
+    for name in ('README.md','LICENSE','THIRD_PARTY_ASSETS.md','CHANGELOG.md','content.json'):
         files[name]=(ROOT/name).read_bytes()
-    roots=('README.md','LICENSE','CHANGELOG.md','content.json','build.gradle','settings.gradle',
+    roots=('README.md','LICENSE','THIRD_PARTY_ASSETS.md','CHANGELOG.md','content.json','build.gradle','settings.gradle',
            'gradle.properties','gradlew','gradlew.bat','.gitignore')
     for name in roots: files['source/'+name]=(ROOT/name).read_bytes()
     for directory in ('src','tools','gradle','docs'):
@@ -94,8 +110,9 @@ explanatory text; the prayer book also includes historic Latin prayers.
         'registered_items':len(catalog['blocks'])+len(catalog['items']),
         'blocks':len(catalog['blocks']),'vestments':len(catalog['vestments']),
         'recipes':len(list((ROOT/'src/main/resources/data/catholicraft/recipe').glob('*.json'))),
-        'graphical_playtest_performed':False
+        'graphical_playtest_performed':graphical_passed
     }
+    if (ROOT/'build/graphical-validation.json').is_file(): files['validation/graphical-validation.json']=(ROOT/'build/graphical-validation.json').read_bytes()
     files['validation/summary.json']=(json.dumps(validation,indent=2)+'\n').encode()
     files['SHA256SUMS.txt']=''.join(f'{digest(data)}  {name}\n' for name,data in sorted(files.items())).encode()
     target=ROOT/f'releases/catholicraft-{version}.zip'

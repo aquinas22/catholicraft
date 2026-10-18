@@ -1,0 +1,8 @@
+{
+  "sound_event": "catholicraft:chant.veni_sancte",
+  "description": {
+    "translate": "song.catholicraft.veni_sancte"
+  },
+  "length_in_seconds": 157.280635,
+  "comparator_output": 10
+}

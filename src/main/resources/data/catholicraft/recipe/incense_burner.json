@@ -1,17 +1,20 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "pattern": [
-    "G G",
-    "GCG",
-    " G "
-  ],
-  "key": {
-    "G": "minecraft:gold_ingot",
-    "C": "minecraft:charcoal"
-  },
-  "result": {
-    "id": "catholicraft:incense_burner",
-    "count": 1
+  "type": "catholicraft:workbench",
+  "recipe": {
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "pattern": [
+      "G G",
+      "GCG",
+      " G "
+    ],
+    "key": {
+      "G": "minecraft:gold_ingot",
+      "C": "minecraft:charcoal"
+    },
+    "result": {
+      "id": "catholicraft:incense_burner",
+      "count": 1
+    }
   }
 }

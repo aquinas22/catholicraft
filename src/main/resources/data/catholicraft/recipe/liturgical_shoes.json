@@ -1,15 +1,18 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "pattern": [
-    "L L",
-    "L L"
-  ],
-  "key": {
-    "L": "minecraft:leather"
-  },
-  "result": {
-    "id": "catholicraft:liturgical_shoes",
-    "count": 1
+  "type": "catholicraft:workbench",
+  "recipe": {
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "pattern": [
+      "L L",
+      "L L"
+    ],
+    "key": {
+      "L": "minecraft:leather"
+    },
+    "result": {
+      "id": "catholicraft:liturgical_shoes",
+      "count": 1
+    }
   }
 }

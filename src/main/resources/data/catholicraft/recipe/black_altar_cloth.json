@@ -1,15 +1,18 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "ingredients": [
-    "minecraft:white_wool",
-    "minecraft:white_wool",
-    "minecraft:white_wool",
-    "minecraft:gold_nugget",
-    "minecraft:black_dye"
-  ],
-  "result": {
-    "id": "catholicraft:black_altar_cloth",
-    "count": 1
+  "type": "catholicraft:workbench",
+  "recipe": {
+    "type": "minecraft:crafting_shapeless",
+    "category": "misc",
+    "ingredients": [
+      "minecraft:white_wool",
+      "minecraft:white_wool",
+      "minecraft:white_wool",
+      "minecraft:gold_nugget",
+      "minecraft:black_dye"
+    ],
+    "result": {
+      "id": "catholicraft:black_altar_cloth",
+      "count": 1
+    }
   }
 }

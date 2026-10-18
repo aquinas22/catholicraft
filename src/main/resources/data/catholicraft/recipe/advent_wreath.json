@@ -1,19 +1,22 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "pattern": [
-    "LPL",
-    "PBP",
-    "LRL"
-  ],
-  "key": {
-    "L": "minecraft:spruce_leaves",
-    "P": "minecraft:purple_candle",
-    "R": "minecraft:pink_candle",
-    "B": "catholicraft:beeswax"
-  },
-  "result": {
-    "id": "catholicraft:advent_wreath",
-    "count": 1
+  "type": "catholicraft:workbench",
+  "recipe": {
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "pattern": [
+      "LPL",
+      "PBP",
+      "LRL"
+    ],
+    "key": {
+      "L": "minecraft:spruce_leaves",
+      "P": "minecraft:purple_candle",
+      "R": "minecraft:pink_candle",
+      "B": "catholicraft:beeswax"
+    },
+    "result": {
+      "id": "catholicraft:advent_wreath",
+      "count": 1
+    }
   }
 }

@@ -1,17 +1,20 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "pattern": [
-    " Q ",
-    "BQB",
-    "QQQ"
-  ],
-  "key": {
-    "Q": "minecraft:quartz",
-    "B": "minecraft:brown_dye"
-  },
-  "result": {
-    "id": "catholicraft:st_joseph_statue",
-    "count": 1
+  "type": "catholicraft:workbench",
+  "recipe": {
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "pattern": [
+      " Q ",
+      "BQB",
+      "QQQ"
+    ],
+    "key": {
+      "Q": "minecraft:quartz",
+      "B": "minecraft:brown_dye"
+    },
+    "result": {
+      "id": "catholicraft:st_joseph_statue",
+      "count": 1
+    }
   }
 }

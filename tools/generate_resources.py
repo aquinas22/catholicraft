@@ -8,6 +8,8 @@ import json
 from pathlib import Path
 import random
 from PIL import Image, ImageDraw, ImageFont
+import expanded_resources as expanded
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 RES = ROOT / 'src/main/resources'
@@ -22,15 +24,37 @@ BLOCKS = ['tabernacle', 'altar', 'crucifix', 'holy_water_font', 'baptismal_font'
           'altar_candle', 'sanctuary_lamp', 'church_bell', 'kneeler', 'pew',
           'chalice', 'ciborium', 'monstrance', 'cross_stained_glass', 'sacristy_cabinet',
           'advent_wreath', 'votive_rack', 'stations_of_the_cross', 'incense_burner',
-          'our_lady_statue', 'st_joseph_statue', 'credence_table', 'ambo']
+          'our_lady_statue', 'st_joseph_statue', 'credence_table', 'ambo', *expanded.ART, 'st_josephs_workbench']
 ITEMS = ['missal_1962', 'modern_missal', 'field_guide', 'holy_water', 'rosary', 'thurible',
          'incense', 'st_benedict_medal', 'miraculous_medal', 'st_michael_medal',
          *[color + '_chasuble' for color in COLORS], 'alb', 'biretta', 'mitre', 'liturgical_shoes',
          *[color + '_dalmatic' for color in COLORS], 'cassock', 'surplice',
          *[color + '_altar_cloth' for color in COLORS], 'prayer_book', 'stations_book',
-         'aspergillum', 'altar_bell', 'processional_cross', 'scapular', 'beeswax', 'altar_bread']
+         'aspergillum', 'altar_bell', 'processional_cross', 'scapular', 'beeswax', 'altar_bread', *expanded.NEW_ITEMS]
 VESTMENTS=[n for n in ITEMS if n.endswith(('_chasuble','_dalmatic')) or n in ('alb','biretta','mitre','liturgical_shoes','cassock','surplice')]
 BOOKS=['missal_1962','modern_missal','field_guide','prayer_book','stations_book']
+
+
+# The pack's shared Patchouli-style book renderer (tools/art/bookart.py at the workspace root).
+for _parent in Path(__file__).resolve().parents:
+    if (_parent / 'tools/art/bookart.py').is_file():
+        sys.path.insert(0, str(_parent / 'tools/art'))
+        break
+import bookart
+
+BOOK_LOOKS = {
+    # name: (cover, emblem, emblem colour, ribbon, gilt page edges)
+    'field_guide': ((40, 67, 94), 'cross', bookart.GOLD, (177, 57, 68), False),
+    'missal_1962': ((150, 45, 62), 'chalice', bookart.GOLD, (238, 238, 226), True),
+    'modern_missal': ((48, 104, 83), 'chi_rho', bookart.GOLD, bookart.GOLD, False),
+    'prayer_book': ((70, 102, 139), 'sacred_heart', (214, 64, 72), bookart.GOLD, False),
+    'stations_book': ((93, 54, 105), 'calvary', bookart.GOLD, (177, 57, 68), False),
+}
+
+
+def book_art(name):
+    cover, emblem, emblem_color, ribbon, gilt = BOOK_LOOKS[name]
+    return bookart.book(32, cover=cover, emblem=emblem, emblem_color=emblem_color, ribbon=ribbon, edge_gilt=gilt)
 
 def write(path, data):
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -124,15 +148,11 @@ def textures():
 def icon(name):
     im = Image.new('RGBA',(32,32))
     d = ImageDraw.Draw(im)
+    if name in expanded.NEW_ITEMS:
+        expanded.icon(sys.modules[__name__], name); return
     if name in BOOKS:
-        color = {'missal_1962':'#962d3e','modern_missal':'#306853','field_guide':'#28435e','prayer_book':'#46668b','stations_book':'#5d3669'}[name]
-        d.polygon([(6,5),(24,3),(27,7),(27,26),(8,29),(5,26),(5,7)],fill=INK)
-        d.polygon([(8,7),(25,5),(25,24),(8,27)],fill=color)
-        d.rectangle((6,7,8,26),fill=shade(color,-20))
-        d.polygon([(9,27),(25,24),(25,26),(10,29)], fill='#eee3c5')
-        d.line((10,25,24,23), fill=GOLD)
-        cross(d,12,10,10,13,GOLD,2)
-        d.rectangle((20,26,22,30),fill='#b13944')
+        # Patchouli-style three-quarter books from the pack's shared book art, each with its own emblem.
+        im = book_art(name)
     elif name == 'holy_water':
         d.rectangle((12,3,19,6),fill=INK)
         d.rectangle((13,3,18,5),fill='#a77843')
@@ -283,8 +303,46 @@ def model(name, elements, extra=None):
     if extra: result.update(extra)
     write(ASSETS / f'models/block/{name}.json', result)
 
+def workbench():
+    """St. Joseph's Workbench: a dark-oak carpenter's bench with his square and saw on top and a carved lily in front."""
+    oak, oak_dark, oak_light, gold, steel, lily = '#4a3018', '#2f1d0e', '#6b4626', '#d9b35b', '#b9bec6', '#f3efe2'
+    def planks(seed):
+        rng = random.Random(seed)
+        im = Image.new('RGBA', (16, 16))
+        for y in range(16):
+            for x in range(16):
+                n = rng.randrange(-6, 7) + (-22 if y % 4 == 3 else 0) + (-14 if (x + (y // 4) * 5) % 16 == 0 else 0)
+                im.putpixel((x, y), (*shade(oak, n), 255))
+        return im
+    top = planks('workbench_top'); d = ImageDraw.Draw(top)
+    d.rectangle((0, 0, 15, 15), outline=rgb(oak_dark))
+    d.line((2, 3, 9, 3), fill=rgb(gold)); d.line((2, 3, 2, 10), fill=rgb(gold))          # carpenter's square
+    d.line((3, 4, 9, 4), fill=shade(gold, -50)); d.line((3, 4, 3, 10), fill=shade(gold, -50))
+    for i in range(6): d.point((7 + i, 12 - i // 2), fill=rgb(steel))                     # saw blade
+    d.line((6, 13, 7, 12), fill=rgb(oak_light)); d.point((5, 13), fill=rgb(oak_light))
+    for x, y in ((11, 9), (12, 10), (13, 8)): d.point((x, y), fill=shade(oak_light, 40))  # shavings
+    save(ASSETS/'textures/block/st_josephs_workbench_top.png', top)
+    side = planks('workbench_side'); d = ImageDraw.Draw(side)
+    d.rectangle((0, 0, 15, 2), fill=rgb(oak_dark)); d.rectangle((0, 13, 2, 15), fill=rgb(oak_dark)); d.rectangle((13, 13, 15, 15), fill=rgb(oak_dark))
+    d.rectangle((3, 5, 12, 10), outline=rgb(oak_dark)); d.rectangle((7, 7, 8, 8), fill=rgb(gold))   # drawer and pull
+    d.rectangle((3, 13, 12, 15), fill=(26, 15, 7, 255))  # shadow under the bench
+    save(ASSETS/'textures/block/st_josephs_workbench_side.png', side)
+    front = planks('workbench_front'); d = ImageDraw.Draw(front)
+    d.rectangle((0, 0, 15, 2), fill=rgb(oak_dark)); d.rectangle((0, 13, 2, 15), fill=rgb(oak_dark)); d.rectangle((13, 13, 15, 15), fill=rgb(oak_dark))
+    d.rectangle((3, 13, 12, 15), fill=(26, 15, 7, 255))  # shadow under the bench
+    # A white lily, St. Joseph's flower: stem, leaves and a three-petal bloom.
+    d.line((8, 6, 8, 12), fill=(86, 140, 70, 255)); d.point((7, 10), fill=(86, 140, 70, 255)); d.point((9, 9), fill=(86, 140, 70, 255))
+    for x, y in ((8, 3), (8, 4), (7, 5), (9, 5), (6, 4), (10, 4), (8, 5)): d.point((x, y), fill=rgb(lily))
+    d.point((8, 5), fill=rgb(gold))
+    save(ASSETS/'textures/block/st_josephs_workbench_front.png', front)
+    write(ASSETS/'models/block/st_josephs_workbench.json', {'parent': 'minecraft:block/orientable_with_bottom', 'textures': {
+        'top': 'catholicraft:block/st_josephs_workbench_top', 'front': 'catholicraft:block/st_josephs_workbench_front',
+        'side': 'catholicraft:block/st_josephs_workbench_side', 'bottom': 'minecraft:block/dark_oak_planks',
+        'particle': 'catholicraft:block/st_josephs_workbench_side'}})
+
 def models():
     c = cuboid
+    workbench()
     base = [c([2,0,2],[14,2,14],'gold'), c([3,2,3],[13,12,13],'gold'), c([2,12,2],[14,14,14],'gold'),
             c([7,14,7],[9,16,9],'gold'),c([5,14.5,7],[11,15.5,9],'gold')]
     model('tabernacle', base+[c([3,2,2.5],[13,12,3],'gold',{'north':'tabernacle_front'})])
@@ -325,9 +383,6 @@ def models():
     model('incense_burner',burner+[c([3,9,3],[13,10,13],'wood')])
     coal=c([3,9,3],[13,10,13],'red_cloth'); coal['light_emission']=6
     model('incense_burner_lit',burner+[coal])
-    statuebase=[c([3,0,3],[13,2,13],'quartz'),c([5,2,5],[11,10,11],'linen'),c([6,10,6],[10,11,10],'skin'),c([6,11,6],[10,15,10],'skin')]
-    model('our_lady_statue',statuebase+[c([4,2,9],[12,12,12],'blue_cloth'),c([5,10,9],[11,16,11],'blue_cloth'),c([7,7,4],[9,10,5],'skin')])
-    model('st_joseph_statue',statuebase+[c([4,2,9],[12,11,12],'brown_cloth'),c([9,5,3],[12,9,6],'linen'),c([10,9,3],[12,11,5],'skin'),c([3,2,5],[4,14,6],'wood')])
     model('credence_table',[c([0,11,0],[16,14,16],'wood'),c([1,0,1],[3,11,3],'wood'),c([13,0,1],[15,11,3],'wood'),c([1,0,13],[3,11,15],'wood'),c([13,0,13],[15,11,15],'wood')])
     model('ambo',[c([2,0,2],[14,2,14],'wood'),c([4,2,6],[12,12,14],'wood'),c([1,12,3],[15,15,15],'wood'),c([3,15,5],[13,15.5,13],'linen'),c([6,5,5.8],[10,10,6],'gold')])
     model('crucifix',[c([6.5,0,7],[9.5,16,9],'wood'),c([1,10,7],[15,13,9],'wood'),
@@ -357,6 +412,7 @@ def models():
     model('monstrance',[c([4,0,4],[12,2,12],'gold'),c([7,2,7],[9,6,9],'gold'),c([4,6,7],[12,14,9],'gold'),
                         c([2,9,7],[14,11,9],'gold'),c([7,5,7],[9,15,9],'gold'),c([6,8,6.5],[10,12,7],'linen'),
                         c([7,14,7],[9,16,9],'gold')])
+    expanded.statues(sys.modules[__name__]); expanded.icons(sys.modules[__name__])
     write(ASSETS/'models/block/cross_stained_glass.json', {'parent':'minecraft:block/cube_all','textures':{'all':{'sprite':'catholicraft:block/cross_stained_glass','force_translucent':True}}})
     for name in BLOCKS:
         variants = {}
@@ -442,17 +498,26 @@ def vestments():
             layers['humanoid_baby']=[{'texture':'catholicraft:'+name}]
         write(ASSETS/f'equipment/{name}.json',{'layers':layers})
 
+# Made at an ordinary crafting table; every other CatholiCraft recipe is made at St. Joseph's Workbench, so none of
+# them can collide with vanilla or other mods' recipes (the aspergillum once shadowed the iron shovel).
+CRAFTING_TABLE = ('field_guide', 'st_josephs_workbench')
+
+def recipe_file(name, recipe):
+    if name not in CRAFTING_TABLE: recipe = {'type': 'catholicraft:workbench', 'recipe': recipe}
+    write(DATA/f'recipe/{name}.json', recipe)
+
 def shaped(name, pattern, key, count=1):
     ingredient = lambda value: value if ':' in value else 'minecraft:'+value
-    write(DATA/f'recipe/{name}.json',{'type':'minecraft:crafting_shaped','category':'misc','pattern':pattern,
+    recipe_file(name, {'type':'minecraft:crafting_shaped','category':'misc','pattern':pattern,
           'key':{k:ingredient(v) for k,v in key.items()},'result':{'id':'catholicraft:'+name,'count':count}})
 
 def shapeless(name, ingredients, count=1):
-    write(DATA/f'recipe/{name}.json',{'type':'minecraft:crafting_shapeless','category':'misc',
+    recipe_file(name, {'type':'minecraft:crafting_shapeless','category':'misc',
           'ingredients':[s if ':' in s else 'minecraft:'+s for s in ingredients],
           'result':{'id':'catholicraft:'+name,'count':count}})
 
 def recipes():
+    shaped('st_josephs_workbench',[' B ','NCN','PPP'],{'B':'book','N':'gold_nugget','C':'crafting_table','P':'dark_oak_planks'})
     shaped('tabernacle',['GGG','GCG','GGG'],{'G':'gold_ingot','C':'chest'})
     shaped('altar',['WWW','QQQ','Q Q'],{'W':'white_wool','Q':'quartz_block'})
     shaped('crucifix',[' N ','SNS',' S '],{'N':'gold_nugget','S':'stick'})
@@ -505,6 +570,12 @@ def recipes():
     shaped('scapular',['SSS','W W'],{'S':'string','W':'brown_wool'})
     shapeless('beeswax',['honeycomb'],2)
     shaped('altar_bread',['WWW'],{'W':'wheat'},6)
+    for name in expanded.ART:
+        dye={'annunciation_icon':'light_blue_dye','sistine_madonna_icon':'blue_dye','last_supper_icon':'red_dye'}[name]
+        shaped(name,['GGG','DPD','GGG'],{'G':'gold_nugget','D':dye,'P':'painting'})
+    shapeless('wine_cruet',['glass_bottle','sweet_berries','sugar'])
+    for track,dye in [('veni_creator','white_dye'),('veni_sancte','red_dye'),('dies_irae','black_dye')]:
+        shapeless('chant_'+track,['copper_ingot','paper',dye,'gold_nugget'])
     for name in BLOCKS:
         if name=='cross_stained_glass':
             conditions=[{'condition':'minecraft:match_tool','predicate':{'predicates':{'minecraft:enchantments':[{'enchantments':'minecraft:silk_touch','levels':{'min':1}}]}}}]
@@ -513,15 +584,17 @@ def recipes():
         if name in ('altar','stations_of_the_cross'):
             entry['functions']=[{'function':'minecraft:copy_state','block':'catholicraft:'+name,'properties':['cloth' if name=='altar' else 'station']}]
         write(DATA/f'loot_table/blocks/{name}.json',{'type':'minecraft:block','pools':[{'rolls':1,'entries':[entry], 'conditions':conditions}]})
-    wooden=('crucifix','kneeler','pew','sacristy_cabinet','stations_of_the_cross','credence_table','ambo')
+    wooden=('crucifix','kneeler','pew','sacristy_cabinet','stations_of_the_cross','credence_table','ambo','st_josephs_workbench')
     pickaxe=[name for name in BLOCKS if name not in (*wooden,'cross_stained_glass','advent_wreath')]
     write(RES/'data/minecraft/tags/block/mineable/pickaxe.json',{'replace':False,'values':['catholicraft:'+n for n in pickaxe]})
     write(RES/'data/minecraft/tags/block/mineable/axe.json',{'replace':False,'values':['catholicraft:'+n for n in wooden]})
     write(RES/'data/minecraft/tags/item/lectern_books.json',{'replace':False,'values':['catholicraft:'+n for n in BOOKS]})
     write(DATA/'tags/item/devotional_medals.json',{'replace':False,'values':['catholicraft:'+n for n in ITEMS if n.endswith('_medal')]})
-    # Discover recipes through the recipe book when acquiring their first ingredient.
+    # Discover crafting-table recipes through the recipe book when acquiring their first ingredient.
+    for old in (DATA/'advancement/recipes').glob('*.json'): old.unlink()
     for file in sorted((DATA/'recipe').glob('*.json')):
         recipe=json.loads(file.read_text())
+        if recipe['type']=='catholicraft:workbench': continue
         first=next(iter(recipe['key'].values())) if 'key' in recipe else recipe['ingredients'][0]
         write(DATA/f'advancement/recipes/{file.stem}.json',{
             'parent':'minecraft:recipes/root',
@@ -532,7 +605,7 @@ def recipes():
 def translations():
     names={n:n.replace('_',' ').title() for n in ITEMS+BLOCKS}
     names.update({'missal_1962':'1962 Roman Missal','modern_missal':'Modern Roman Missal','st_benedict_medal':'St. Benedict Medal',
-                  'st_michael_medal':'St. Michael Medal','cross_stained_glass':'Cross Stained Glass','field_guide':'CatholiCraft Field Guide'})
+                  'st_michael_medal':'St. Michael Medal','cross_stained_glass':'Cross Stained Glass','field_guide':'CatholiCraft Field Guide','st_josephs_workbench':"St. Joseph's Workbench"})
     names.update({'our_lady_statue':'Statue of Our Lady','st_joseph_statue':'Statue of St. Joseph','altar_bread':'Unconsecrated Altar Bread','prayer_book':'Catholic Prayer Book','stations_book':'Stations of the Cross Companion'})
     lang={'itemGroup.catholicraft':'CatholiCraft'}
     for name,title in names.items(): lang[('block' if name in BLOCKS else 'item')+'.catholicraft.'+name]=title
@@ -548,7 +621,8 @@ def translations():
         'thurible':'Use with incense in your inventory to release smoke.', 'incense':'Fuel for the thurible.',
         'st_benedict_medal':'A devotional medal with the Cross of St. Benedict.', 'miraculous_medal':'A Marian devotional medal.',
         'st_michael_medal':'A devotional medal honoring St. Michael the Archangel.', 'vestment':'Right-click to equip. Liturgical clothing.'}
-    tips.update({'sacristy_cabinet':'Right-click to open 27 storage slots.','advent_wreath':'Flint and steel: light one candle. Empty hand: extinguish one.',
+    tips.update({'st_josephs_workbench':'Every CatholiCraft item is made here, not at a crafting table.',
+        'sacristy_cabinet':'Right-click to open 27 storage slots.','advent_wreath':'Flint and steel: light one candle. Empty hand: extinguish one.',
         'votive_rack':'Flint and steel: light. Empty hand: extinguish.','stations_of_the_cross':'Use: next station. Sneak-use: previous station.',
         'incense_burner':'Use incense to add one minute of fragrant smoke.','our_lady_statue':'A placeable devotional statue of Our Lady.',
         'st_joseph_statue':'A placeable devotional statue of St. Joseph.','credence_table':'A side table for chapel vessels.','ambo':'A wooden stand for your chapel.',
@@ -569,6 +643,7 @@ def translations():
         'message.catholicraft.burner_time':'Incense: %s seconds remaining. Add incense to refill.',
         'message.catholicraft.station':'Station %s: %s','message.catholicraft.pew_occupied':'Someone is already sitting here.',
         'message.catholicraft.pew_sit':'Seated. Sneak to stand up.'})
+    lang['container.catholicraft.st_josephs_workbench']="St. Joseph's Workbench"
     write(ASSETS/'lang/en_us.json',lang)
     write(ROOT/'content.json',{'minecraft':'26.2','loader':'NeoForge 26.2.0.90','blocks':BLOCKS,'items':ITEMS,
                              'interaction_only_items':['holy_water'],'vestments':VESTMENTS,'books':BOOKS})
@@ -591,7 +666,7 @@ def preview():
     save(ROOT/'docs/item-preview.png',atlas)
 
 def main():
-    textures(); models(); vestments(); recipes(); translations(); preview()
+    textures(); models(); vestments(); recipes(); translations(); expanded.extras(sys.modules[__name__]); preview()
     print(f'Generated {len(BLOCKS)} blocks, {len(ITEMS)} items, {len(list((DATA/"recipe").glob("*.json")))} recipes.')
 
 if __name__=='__main__': main()

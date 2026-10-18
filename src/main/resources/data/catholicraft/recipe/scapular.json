@@ -1,16 +1,19 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "pattern": [
-    "SSS",
-    "W W"
-  ],
-  "key": {
-    "S": "minecraft:string",
-    "W": "minecraft:brown_wool"
-  },
-  "result": {
-    "id": "catholicraft:scapular",
-    "count": 1
+  "type": "catholicraft:workbench",
+  "recipe": {
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "pattern": [
+      "SSS",
+      "W W"
+    ],
+    "key": {
+      "S": "minecraft:string",
+      "W": "minecraft:brown_wool"
+    },
+    "result": {
+      "id": "catholicraft:scapular",
+      "count": 1
+    }
   }
 }

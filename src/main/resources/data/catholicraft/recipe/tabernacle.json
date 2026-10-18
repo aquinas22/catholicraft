@@ -1,17 +1,20 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "pattern": [
-    "GGG",
-    "GCG",
-    "GGG"
-  ],
-  "key": {
-    "G": "minecraft:gold_ingot",
-    "C": "minecraft:chest"
-  },
-  "result": {
-    "id": "catholicraft:tabernacle",
-    "count": 1
+  "type": "catholicraft:workbench",
+  "recipe": {
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "pattern": [
+      "GGG",
+      "GCG",
+      "GGG"
+    ],
+    "key": {
+      "G": "minecraft:gold_ingot",
+      "C": "minecraft:chest"
+    },
+    "result": {
+      "id": "catholicraft:tabernacle",
+      "count": 1
+    }
   }
 }

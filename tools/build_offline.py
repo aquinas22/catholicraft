@@ -67,6 +67,7 @@ def main():
                         data = data.replace(b'${version}', version.encode())
                     archive.writestr(file.relative_to(base).as_posix(), data)
         archive.write(ROOT / 'LICENSE', 'META-INF/LICENSE')
+        archive.write(ROOT / 'THIRD_PARTY_ASSETS.md', 'META-INF/THIRD_PARTY_ASSETS.md')
     if args.tests:
         test_classes = ROOT / 'build/classes/java/gameTest'
         test_classes.mkdir(parents=True, exist_ok=True)

@@ -28,6 +28,8 @@ public final class ChapelCommands {
                 context.getSource().sendSuccess(() -> Component.translatable("message.catholicraft.kit"), false);
                 return 1;
             }))
+            .then(Commands.literal("cathedral").executes(context -> CathedralCommands.build(context.getSource())))
+            .then(Commands.literal("monk").executes(context -> CathedralCommands.monk(context.getSource())))
             .then(Commands.literal("chapel").executes(context -> {
                 var player = context.getSource().getPlayerOrException();
                 ServerLevel level = context.getSource().getLevel();
@@ -63,6 +65,13 @@ public final class ChapelCommands {
             cabinet.setItem(2,new ItemStack(ModContent.INCENSE.get(),16));
             cabinet.setItem(3,new ItemStack(ModContent.ROSARY.get()));
             cabinet.setItem(4,new ItemStack(ModContent.ASPERGILLUM.get()));
+            cabinet.setItem(5,new ItemStack(ModContent.ALTAR_BREAD.get(),24));
+            cabinet.setItem(6,new ItemStack(ModContent.WINE_CRUET.get(),8));
+            cabinet.setItem(7,new ItemStack(ModContent.ALB.get()));
+            cabinet.setItem(8,new ItemStack(ModContent.WHITE_CHASUBLE.get()));
+            cabinet.setItem(9,new ItemStack(ModContent.CHANT_VENI_CREATOR.get()));
+            cabinet.setItem(10,new ItemStack(ModContent.CHANT_VENI_SANCTE.get()));
+            cabinet.setItem(11,new ItemStack(ModContent.CHANT_DIES_IRAE.get()));
         }
     }
 
@@ -110,6 +119,9 @@ public final class ChapelCommands {
         plan.put(new BlockPos(13,2,8),ModContent.ST_JOSEPH_STATUE.get().defaultBlockState().setValue(ChapelBlock.FACING,Direction.WEST));
         for(int i=0;i<14;i++) plan.put(new BlockPos(3+i%7,2,i<7 ? 1 : 9),ModContent.STATIONS.get().defaultBlockState()
             .setValue(ChapelBlock.STATION,i+1).setValue(ChapelBlock.FACING,i<7 ? Direction.SOUTH : Direction.NORTH));
+        plan.put(new BlockPos(3,1,8),Blocks.JUKEBOX.defaultBlockState());
+        plan.put(new BlockPos(10,3,1),ModContent.ANNUNCIATION_ICON.get().defaultBlockState().setValue(ChapelBlock.FACING,Direction.SOUTH));
+        plan.put(new BlockPos(10,3,9),ModContent.SISTINE_MADONNA_ICON.get().defaultBlockState().setValue(ChapelBlock.FACING,Direction.NORTH));
         return plan;
     }
 

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " B ",
+    "NCN",
+    "PPP"
+  ],
+  "key": {
+    "B": "minecraft:book",
+    "N": "minecraft:gold_nugget",
+    "C": "minecraft:crafting_table",
+    "P": "minecraft:dark_oak_planks"
+  },
+  "result": {
+    "id": "catholicraft:st_josephs_workbench",
+    "count": 1
+  }
+}

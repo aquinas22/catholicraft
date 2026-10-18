@@ -1,0 +1,17 @@
+{
+  "type": "catholicraft:workbench",
+  "recipe": {
+    "type": "minecraft:crafting_shapeless",
+    "category": "misc",
+    "ingredients": [
+      "minecraft:copper_ingot",
+      "minecraft:paper",
+      "minecraft:white_dye",
+      "minecraft:gold_nugget"
+    ],
+    "result": {
+      "id": "catholicraft:chant_veni_creator",
+      "count": 1
+    }
+  }
+}

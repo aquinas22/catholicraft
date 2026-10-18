@@ -1,18 +1,21 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "pattern": [
-    "WWW",
-    "WGW",
-    " D "
-  ],
-  "key": {
-    "W": "minecraft:white_wool",
-    "G": "minecraft:gold_nugget",
-    "D": "minecraft:green_dye"
-  },
-  "result": {
-    "id": "catholicraft:green_dalmatic",
-    "count": 1
+  "type": "catholicraft:workbench",
+  "recipe": {
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "pattern": [
+      "WWW",
+      "WGW",
+      " D "
+    ],
+    "key": {
+      "W": "minecraft:white_wool",
+      "G": "minecraft:gold_nugget",
+      "D": "minecraft:green_dye"
+    },
+    "result": {
+      "id": "catholicraft:green_dalmatic",
+      "count": 1
+    }
   }
 }

@@ -1,18 +1,21 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "pattern": [
-    "  P",
-    "PPP",
-    "WRW"
-  ],
-  "key": {
-    "P": "minecraft:dark_oak_planks",
-    "W": "minecraft:stick",
-    "R": "minecraft:red_wool"
-  },
-  "result": {
-    "id": "catholicraft:kneeler",
-    "count": 2
+  "type": "catholicraft:workbench",
+  "recipe": {
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "pattern": [
+      "  P",
+      "PPP",
+      "WRW"
+    ],
+    "key": {
+      "P": "minecraft:dark_oak_planks",
+      "W": "minecraft:stick",
+      "R": "minecraft:red_wool"
+    },
+    "result": {
+      "id": "catholicraft:kneeler",
+      "count": 2
+    }
   }
 }

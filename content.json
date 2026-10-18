@@ -24,7 +24,11 @@
     "our_lady_statue",
     "st_joseph_statue",
     "credence_table",
-    "ambo"
+    "ambo",
+    "annunciation_icon",
+    "sistine_madonna_icon",
+    "last_supper_icon",
+    "st_josephs_workbench"
   ],
   "items": [
     "missal_1962",
@@ -68,7 +72,11 @@
     "processional_cross",
     "scapular",
     "beeswax",
-    "altar_bread"
+    "altar_bread",
+    "wine_cruet",
+    "chant_veni_creator",
+    "chant_veni_sancte",
+    "chant_dies_irae"
   ],
   "interaction_only_items": [
     "holy_water"

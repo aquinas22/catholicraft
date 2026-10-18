@@ -1,17 +1,20 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "pattern": [
-    " N ",
-    "G G",
-    "GGG"
-  ],
-  "key": {
-    "N": "minecraft:gold_nugget",
-    "G": "minecraft:gold_ingot"
-  },
-  "result": {
-    "id": "catholicraft:altar_bell",
-    "count": 1
+  "type": "catholicraft:workbench",
+  "recipe": {
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "pattern": [
+      " N ",
+      "G G",
+      "GGG"
+    ],
+    "key": {
+      "N": "minecraft:gold_nugget",
+      "G": "minecraft:gold_ingot"
+    },
+    "result": {
+      "id": "catholicraft:altar_bell",
+      "count": 1
+    }
   }
 }

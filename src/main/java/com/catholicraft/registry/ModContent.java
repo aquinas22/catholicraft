@@ -1,6 +1,11 @@
 package com.catholicraft.registry;
 
 import com.catholicraft.CatholiCraft;
+import com.catholicraft.block.MassAltarBlockEntity;
+import com.catholicraft.entity.MonkEntity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.sounds.SoundEvent;
 import com.catholicraft.block.ChapelBlock;
 import com.catholicraft.block.TabernacleBlock;
 import com.catholicraft.block.TabernacleBlockEntity;
@@ -43,6 +48,12 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public final class ModContent {
+    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(Registries.ENTITY_TYPE, CatholiCraft.ID);
+    public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(Registries.SOUND_EVENT, CatholiCraft.ID);
+    public static final DeferredHolder<EntityType<?>, EntityType<MonkEntity>> MONK = ENTITIES.register("monk", () -> EntityType.Builder.of(MonkEntity::new, MobCategory.CREATURE).sized(.6F, 1.95F).noLootTable().build(ResourceKey.create(Registries.ENTITY_TYPE, CatholiCraft.id("monk"))));
+    public static final DeferredHolder<SoundEvent, SoundEvent> VENI_CREATOR = SOUNDS.register("chant.veni_creator", () -> SoundEvent.createVariableRangeEvent(CatholiCraft.id("chant.veni_creator")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> VENI_SANCTE = SOUNDS.register("chant.veni_sancte", () -> SoundEvent.createVariableRangeEvent(CatholiCraft.id("chant.veni_sancte")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> DIES_IRAE = SOUNDS.register("chant.dies_irae", () -> SoundEvent.createVariableRangeEvent(CatholiCraft.id("chant.dies_irae")));
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(CatholiCraft.ID);
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(CatholiCraft.ID);
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, CatholiCraft.ID);
@@ -50,6 +61,9 @@ public final class ModContent {
 
     public static final DeferredBlock<TabernacleBlock> TABERNACLE = BLOCKS.registerBlock("tabernacle", TabernacleBlock::new,
         () -> BlockBehaviour.Properties.of().mapColor(MapColor.GOLD).strength(2.5F).sound(SoundType.METAL).noOcclusion());
+    /** The carpenter's bench where every CatholiCraft item is made (its recipes are not in the crafting table). */
+    public static final DeferredBlock<com.catholicraft.workbench.StJosephsWorkbenchBlock> ST_JOSEPHS_WORKBENCH = BLOCKS.registerBlock("st_josephs_workbench",
+        com.catholicraft.workbench.StJosephsWorkbenchBlock::new, () -> BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).strength(2.5F).sound(SoundType.WOOD));
     public static final DeferredBlock<ChapelBlock> ALTAR = furnishing("altar", ChapelBlock.Kind.ALTAR, MapColor.QUARTZ);
     public static final DeferredBlock<ChapelBlock> CRUCIFIX = furnishing("crucifix", ChapelBlock.Kind.CRUCIFIX, MapColor.WOOD);
     public static final DeferredBlock<ChapelBlock> HOLY_WATER_FONT = furnishing("holy_water_font", ChapelBlock.Kind.FONT, MapColor.QUARTZ);
@@ -76,6 +90,14 @@ public final class ModContent {
     public static final DeferredBlock<ChapelBlock> ST_JOSEPH_STATUE = furnishing("st_joseph_statue",ChapelBlock.Kind.STATUE,MapColor.QUARTZ);
     public static final DeferredBlock<ChapelBlock> CREDENCE_TABLE = furnishing("credence_table",ChapelBlock.Kind.TABLE,MapColor.WOOD);
     public static final DeferredBlock<ChapelBlock> AMBO = furnishing("ambo",ChapelBlock.Kind.AMBO,MapColor.WOOD);
+
+    public static final DeferredBlock<ChapelBlock> ANNUNCIATION_ICON = furnishing("annunciation_icon", ChapelBlock.Kind.ART, MapColor.GOLD);
+    public static final DeferredBlock<ChapelBlock> SISTINE_MADONNA_ICON = furnishing("sistine_madonna_icon", ChapelBlock.Kind.ART, MapColor.GOLD);
+    public static final DeferredBlock<ChapelBlock> LAST_SUPPER_ICON = furnishing("last_supper_icon", ChapelBlock.Kind.ART, MapColor.GOLD);
+    public static final DeferredItem<Item> WINE_CRUET = ITEMS.registerSimpleItem("wine_cruet", p -> lore(p.stacksTo(16), "wine_cruet"));
+    public static final DeferredItem<Item> CHANT_VENI_CREATOR = ITEMS.registerSimpleItem("chant_veni_creator", p -> lore(p.stacksTo(1).jukeboxPlayable(ResourceKey.create(Registries.JUKEBOX_SONG, CatholiCraft.id("veni_creator"))), "chant"));
+    public static final DeferredItem<Item> CHANT_VENI_SANCTE = ITEMS.registerSimpleItem("chant_veni_sancte", p -> lore(p.stacksTo(1).jukeboxPlayable(ResourceKey.create(Registries.JUKEBOX_SONG, CatholiCraft.id("veni_sancte"))), "chant"));
+    public static final DeferredItem<Item> CHANT_DIES_IRAE = ITEMS.registerSimpleItem("chant_dies_irae", p -> lore(p.stacksTo(1).jukeboxPlayable(ResourceKey.create(Registries.JUKEBOX_SONG, CatholiCraft.id("dies_irae"))), "chant"));
 
     public static final DeferredItem<WrittenBookItem> MISSAL_1962 = ITEMS.registerItem("missal_1962", WrittenBookItem::new,
         p -> lore(p.stacksTo(1).rarity(Rarity.UNCOMMON).component(DataComponents.WRITTEN_BOOK_CONTENT, MissalPages.MISSAL_1962), "missal_1962"));
@@ -136,6 +158,8 @@ public final class ModContent {
         BLOCK_ENTITIES.register("tabernacle", () -> new BlockEntityType<>(TabernacleBlockEntity::new, TABERNACLE.get(),SACRISTY_CABINET.get()));
     public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<IncenseBurnerBlockEntity>> INCENSE_BURNER_ENTITY =
         BLOCK_ENTITIES.register("incense_burner",() -> new BlockEntityType<>(IncenseBurnerBlockEntity::new,INCENSE_BURNER.get()));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MassAltarBlockEntity>> MASS_ALTAR_ENTITY = BLOCK_ENTITIES.register("mass_altar", () -> new BlockEntityType<>(MassAltarBlockEntity::new, ALTAR.get()));
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> TAB = TABS.register("chapel", () -> CreativeModeTab.builder()
         .title(Component.translatable("itemGroup.catholicraft"))

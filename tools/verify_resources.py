@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Audit every registered content ID, resource reference, and survival recipe."""
 import json
+import hashlib
 from pathlib import Path
 import re
 
@@ -53,8 +54,12 @@ for name in all_ids:
     require(f'{prefix}.catholicraft.{name}' in lang,f'{name}: missing name')
     if name not in catalog['interaction_only_items']:
         recipe=load(D/f'recipe/{name}.json')
+        if recipe.get('type')=='catholicraft:workbench':
+            recipe=recipe['recipe']  # made at St. Joseph's Workbench; no recipe-book advancement
+        else:
+            require(name in ('field_guide','st_josephs_workbench'),f'{name}: should be a St. Joseph\'s Workbench recipe')
+            load(D/f'advancement/recipes/{name}.json')
         require(recipe.get('result',{}).get('id')=='catholicraft:'+name,f'{name}: missing survival output')
-        load(D/f'advancement/recipes/{name}.json')
         keys=recipe.get('key',{})
         if keys:
             used=set(''.join(recipe['pattern']))-{' '}
@@ -78,5 +83,37 @@ for key in re.findall(r'Component\.translatable\("([^"]+)"', ''.join(p.read_text
     if key.endswith('.'): continue
     require(key in lang,f'Missing translation {key}')
 
+# Imported media must retain independently verified rights, credits and exact bundled hashes.
+credits=load(RES/'META-INF/catholicraft-assets.json')
+require(isinstance(credits,list) and len(credits)==6,'Six verified public-domain assets must be credited')
+for asset in credits if isinstance(credits,list) else []:
+    require(asset.get('license') in ('PD-self','PD-art'),f'{asset.get("id")}: unapproved media rights')
+    require(asset.get('source_page','').startswith('https://commons.wikimedia.org/wiki/File:'),f'{asset.get("id")}: missing source page')
+    target=RES/asset['asset']
+    require(target.exists(),f'{asset["id"]}: missing imported file')
+    if target.exists():require(hashlib.sha256(target.read_bytes()).hexdigest()==asset['asset_sha256'],f'{asset["id"]}: asset hash changed without updating credits')
+    if 'audio' in asset:
+        streams=asset['audio']['streams']
+        require(any(s.get('codec_name')=='vorbis' and s.get('channels')==1 for s in streams),f'{asset["id"]}: chant must be mono Vorbis')
+sounds=load(A/'sounds.json')
+for name,definition in sounds.items():
+    require(definition.get('subtitle') in lang,f'{name}: missing chant subtitle')
+    for sound in definition['sounds']:
+        require(sound.get('stream') is True,f'{name}: long recording must stream')
+        path=A/'sounds'/(sound['name'].split(':')[1]+'.ogg')
+        require(path.exists(),f'{name}: missing recording')
+for name in ('veni_creator','veni_sancte','dies_irae'):
+    song=load(D/f'jukebox_song/{name}.json')
+    require(song.get('sound_event','').split(':')[-1] in sounds,f'{name}: unregistered jukebox sound')
+    require(song.get('length_in_seconds',0)>25,f'{name}: missing full recording duration')
+structure=load(D/'worldgen/structure/cathedral.json')
+require(structure.get('size',0)>0,'Minecraft jigsaw generation must add the initial piece')
+require((D/'structure/cathedral.nbt').is_file(),'Missing cathedral structure template')
+pool=load(D/'worldgen/template_pool/cathedral/start.json')
+require(pool.get('elements',[{}])[0].get('element',{}).get('location')=='catholicraft:cathedral','Cathedral pool must point to template')
+placement=load(D/'worldgen/structure_set/cathedrals.json').get('placement',{})
+require(placement.get('spacing',0)>placement.get('separation',0)>0,'Cathedral spacing must exceed separation')
+require('catholicraft:cathedral'==load(D/'worldgen/structure_set/cathedrals.json').get('structures',[{}])[0].get('structure'),'Natural structure set must include cathedral')
+
 if errors: raise SystemExit('\n'.join(errors))
-print(f'PASS: {len(all_ids)} registered items, {len(catalog["blocks"])} blocks, all model/texture links, recipes, loot, translations, lectern tags, and {len(catalog["vestments"])} equipment assets.')
+print(f'PASS: {len(all_ids)} registered items, {len(catalog["blocks"])} blocks, all model/texture links, recipes, loot, translations, lectern tags, and {len(catalog["vestments"])} equipment assets; public-domain media hashes, sounds, and cathedral worldgen.')

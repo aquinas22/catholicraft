@@ -1,15 +1,18 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "pattern": [
-    " W ",
-    "WWW"
-  ],
-  "key": {
-    "W": "minecraft:black_wool"
-  },
-  "result": {
-    "id": "catholicraft:biretta",
-    "count": 1
+  "type": "catholicraft:workbench",
+  "recipe": {
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "pattern": [
+      " W ",
+      "WWW"
+    ],
+    "key": {
+      "W": "minecraft:black_wool"
+    },
+    "result": {
+      "id": "catholicraft:biretta",
+      "count": 1
+    }
   }
 }

@@ -1,18 +1,21 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "pattern": [
-    "WWW",
-    "IGI",
-    "I I"
-  ],
-  "key": {
-    "W": "catholicraft:beeswax",
-    "I": "minecraft:iron_ingot",
-    "G": "minecraft:gold_nugget"
-  },
-  "result": {
-    "id": "catholicraft:votive_rack",
-    "count": 1
+  "type": "catholicraft:workbench",
+  "recipe": {
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "pattern": [
+      "WWW",
+      "IGI",
+      "I I"
+    ],
+    "key": {
+      "W": "catholicraft:beeswax",
+      "I": "minecraft:iron_ingot",
+      "G": "minecraft:gold_nugget"
+    },
+    "result": {
+      "id": "catholicraft:votive_rack",
+      "count": 1
+    }
   }
 }

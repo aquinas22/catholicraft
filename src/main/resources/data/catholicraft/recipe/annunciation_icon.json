@@ -1,0 +1,21 @@
+{
+  "type": "catholicraft:workbench",
+  "recipe": {
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "pattern": [
+      "GGG",
+      "DPD",
+      "GGG"
+    ],
+    "key": {
+      "G": "minecraft:gold_nugget",
+      "D": "minecraft:light_blue_dye",
+      "P": "minecraft:painting"
+    },
+    "result": {
+      "id": "catholicraft:annunciation_icon",
+      "count": 1
+    }
+  }
+}

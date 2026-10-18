@@ -39,6 +39,10 @@ public final class ValidateClientResources {
             }
         }
         System.out.printf("PASS: Minecraft parsed %d models, %d client items, %d equipment assets, %d blockstate definitions.%n",models,items,equipment,states);
+        var monk=com.catholicraft.client.MonkModel.layer().bakeRoot();
+        if(!monk.getChild("head").getChild("hat").getChild("hat_rim").isEmpty()) throw new IllegalStateException("Monk cowl must not retain a villager hat brim");
+        monk.getChild("body").getChild("cowl");
+        System.out.println("PASS: Custom monk model layer baked with a cowl and no hat brim.");
         var widths=JsonParser.parseString(Files.readString(Path.of(args[1]))).getAsJsonObject();
         var splitter=new StringSplitter((codepoint,style) -> {
             var width=widths.get(String.valueOf(codepoint));

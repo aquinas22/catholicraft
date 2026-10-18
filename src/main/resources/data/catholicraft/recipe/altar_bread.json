@@ -1,14 +1,17 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "pattern": [
-    "WWW"
-  ],
-  "key": {
-    "W": "minecraft:wheat"
-  },
-  "result": {
-    "id": "catholicraft:altar_bread",
-    "count": 6
+  "type": "catholicraft:workbench",
+  "recipe": {
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "pattern": [
+      "WWW"
+    ],
+    "key": {
+      "W": "minecraft:wheat"
+    },
+    "result": {
+      "id": "catholicraft:altar_bread",
+      "count": 6
+    }
   }
 }

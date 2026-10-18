@@ -5,7 +5,7 @@ A Catholic chapel-building mod for **Minecraft Java Edition 26.2**, **NeoForge 2
 ## Install and play
 
 1. Install the NeoForge profile for Minecraft **26.2**.
-2. Copy `build/libs/catholicraft-1.1.0.jar` into that profile's `mods` folder. If using the release ZIP, take the JAR from its `mods` folder.
+2. Copy `build/libs/catholicraft-1.2.0.jar` into that profile's `mods` folder. If using the release ZIP, take the JAR from its `mods` folder.
 3. Start Minecraft and open the **CatholiCraft** creative tab, or craft a **Field Guide** with a book and a gold nugget.
 
 The development test jar is for developers; the main jar is the only CatholiCraft file players need. There are no extra mod dependencies.
@@ -35,10 +35,15 @@ The development test jar is for developers; the main jar is the only CatholiCraf
 | Aspergillum | Refillable sprinkling tool; eight uses per font charge, with a water-level item bar |
 | Sacristy cabinet | Twenty-seven persistent slots for vestments, books, and supplies |
 | Stations plaques | Cycle through I–XIV; the selected numeral survives mining and replacing |
+| Mass sessions | Persistent, shared guided services: 15 traditional steps or 13 modern steps, with preparation checks and offertory props |
+| Sacred paintings | Framed Annunciation of Cortona, Sistine Madonna, and The Last Supper; use for artist credits |
+| Gregorian chant | Three full public-domain recordings on craftable jukebox discs, with subtitles |
+| Monks | Persistent peaceful residents in brown habits; one emerald buys devotional supplies; sneak-use cycles offers |
+| Cathedrals | Naturally generated 41 × 25 × 29 Gothic buildings with twin bell towers, rose window, buttresses, sanctuary and stocked sacristy |
 | More furnishings | Our Lady and St. Joseph statues, votive rack, credence table, and ambo |
 | Devotional accessories | Altar bell, processional cross, brown scapular, beeswax, and unconsecrated altar bread |
 
-There are **65 registered items**, including **23 placeable blocks**, **18 wearable vestments**, and **64 crafting recipes**. Holy water is obtained through the font interaction. Furnishings have individual 3D models; all textures are original pixel art. Stained glass requires Silk Touch to retrieve.
+There are **72 registered items**, including **26 placeable blocks**, **18 wearable vestments**, and **71 crafting recipes**. Holy water is obtained through the font interaction. Furnishings have individual 3D models; statue geometry and furnishing textures are original. Three historical paintings and three full chant recordings are public domain, with bundled source credits. Stained glass requires Silk Touch to retrieve.
 
 The missals are readable introductory companions, with original explanatory text and short traditional prayers; they are not complete reproductions of either liturgical book. Furnishings and vestments are game representations. Holy-water crafting and status effects are Minecraft mechanics.
 
@@ -65,11 +70,50 @@ Operators and players with cheats enabled can use:
 ```text
 /catholicraft kit
 /catholicraft chapel
+/catholicraft cathedral
+/catholicraft monk
+/locate structure catholicraft:cathedral
 ```
 
 The kit gives one of every item and sixteen incense. Overflow is dropped beside the player. The chapel command builds a furnished chapel **15 blocks east-west, 11 blocks north-south, and 8 blocks high**, starting three blocks east and five blocks north of the player's position. It checks the whole volume first, including the interior, and reports an obstruction without changing anything. Stand in a large, clear area at ground level; the entrance faces west and the altar faces east.
 
 The expanded chapel includes both missals on lecterns, fourteen numbered Stations plaques, both statues, a cabinet stocked with devotional books and supplies, a votive rack, an Advent wreath, a credence table, and an incense burner.
+
+## Guided Mass gameplay
+
+Equip an **alb** on your legs and any **chasuble** on your chest. Place a crucifix, chalice, at least two lit altar candles, and an ambo or lectern within seven horizontal blocks of the altar (two blocks below through four above). Both generated buildings provide these furnishings. Their sacristy cabinets contain vestments, altar bread, wine cruets and chant discs.
+
+Use the **1962 missal on the altar** for the traditional order, or the **modern missal** for the modern order. Use the missal on that same altar again to advance each step. Players within 32 blocks receive the current rite, step and instruction in chat. Use an empty hand to check progress; the celebrant can sneak-use a missal to end a session. Other players can follow along and cannot take over or cancel it. Progress and ownership survive saving and chunk unloading.
+
+Entering the offertory consumes one altar bread and one wine cruet together, returning a glass bottle. A failed check consumes neither. Creative players can represent the gifts without consuming inventory. Craft a wine cruet from a glass bottle, sweet berries and sugar. The guided services cover the Word, gifts, Eucharistic Prayer or Roman Canon, Communion and dismissal; the traditional order also includes the Last Gospel. Seasonal omissions are stated in the guidance. These are roleplay representations, with original prompts rather than reproductions of a copyrighted modern missal.
+
+## Art, statues and chant
+
+Our Lady and St. Joseph now have carved plinths, shaped robes and folds, modeled faces and segmented gold halos. Mary wears a blue mantle and veil with joined hands. Joseph carries the Child Jesus and a flowering lily staff. Both are original Minecraft-native models with matching collision bounds.
+
+Three gilded framed paintings preserve the complete source artwork and its proportions: **Fra Angelico's Annunciation of Cortona**, **Raphael's Sistine Madonna**, and **Leonardo da Vinci's The Last Supper**. Craft each with a painting, six gold nuggets and two matching dyes: light blue, blue or red. Use the frame to read the credit.
+
+Craft **Veni Creator Spiritus**, **Veni Sancte Spiritus**, or **Dies Irae** discs using copper, paper, a gold nugget and white, red or black dye. Insert a disc into a vanilla jukebox; eject it to stop playback. The full recordings stream from the installed mod, work offline and have subtitles. The performer, Membeth, released the recordings themselves into the public domain. Adjust Minecraft's **Jukebox/Note Blocks** volume slider. Choose the chant appropriate to your gathering; Dies Irae is associated with the Requiem.
+
+[Complete asset credits](THIRD_PARTY_ASSETS.md) list the artwork and recording sources, individual rights statements, adaptations and SHA-256 hashes. The same machine-readable manifest and credits are included in the playable JAR. Normal builds never download media. Maintainers can explicitly reimport the verified sources with `python3 tools/import_sacred_assets.py` (Pillow and ffmpeg required).
+
+## Monks and naturally generated cathedrals
+
+Cathedrals generate in **new Overworld chunks** in plains, sunflower plains, meadows, birch forests, forests, flower forests and cherry groves. Their vanilla jigsaw structure set uses 40-chunk spacing, 16-chunk separation and a six-chunk village exclusion radius. Existing explored chunks are preserved. Operators can locate one with `/locate structure catholicraft:cathedral`.
+
+Each cathedral has three resident monks, twin accessible belfries, a rose window, stained glass, pointed arches, flying buttresses, a transept, pews, fourteen Stations, sacred paintings, both statues, a prepared altar and a stocked sacristy with a jukebox. Monks wander near their home and flee danger. They persist with their selected trade and do not despawn with distance.
+
+Use a monk to see the current offer, sneak-use to cycle, then use an emerald to buy: prayer book, eight incense, rosary, twelve altar bread, Veni Creator disc, or four wine cruets. Overflow drops beside you. Monks can also be summoned with `/catholicraft monk` or `/summon catholicraft:monk`.
+
+`/catholicraft cathedral` places the same furnished template three blocks east and fourteen north of you. It requires an entirely clear, loaded **41 × 25 × 29** volume and checks it before construction. The chapel builder retains its 15 × 11 × 8 clearance checks. Both commands require cheats or operator permission.
+
+![Cathedral in Minecraft](docs/cathedral-preview.png)
+
+![Statues in Minecraft](docs/statue-preview.png)
+
+![Monk in Minecraft](docs/monk-preview.png)
+
+![Public-domain paintings in Minecraft](docs/art-preview.png)
 
 ## Build and develop
 
@@ -87,6 +131,7 @@ Generated resources are included in the source tree, so normal builds don't rege
 
 ```sh
 python3 tools/generate_resources.py
+python3 tools/generate_cathedral.py
 python3 tools/generate_test_resources.py
 python3 tools/verify_resources.py
 ```
@@ -105,9 +150,9 @@ These fallback tools read the existing Gradle cache without modifying it or down
 
 ## Validation
 
-The mod has been compiled and loaded through NeoForge in a real Minecraft GameTest server. Eighteen integration tests cover all 64 crafting recipes, tabernacle and cabinet persistence/drops, multiple container users, font refill/depletion, holy water and aspergillum use, all books on lecterns, all equipment, lights/redstone, rosary state, incense fuel and saving, altar frontals, all fourteen stations, pew seating/cleanup, and furnished chapel placement/obstruction checks.
+The mod has been compiled and loaded through NeoForge in a real Minecraft GameTest server. Twenty-six integration tests cover all 71 crafting recipes, tabernacle and cabinet persistence/drops, multiple container users, font refill/depletion, holy water and aspergillum use, all books on lecterns, all equipment, lights/redstone, rosary state, incense fuel and saving, altar frontals, all fourteen stations, pew seating/cleanup, furnished chapel placement/obstruction checks, both complete Mass orders, preparation/ownership/offertory atomicity, chant jukebox playback and persistence, monk trading and persistence, cathedral contents and obstruction checks, and a vanilla jigsaw worldgen start.
 
-Minecraft's native parsers also validate all 122 models, 65 client item definitions, 18 equipment definitions, and 23 blockstate definitions. Its text wrapping code verifies all 56 book pages fit the reading area using the vanilla font's glyph widths. A resource audit checks model/texture references, translations, loot tables, recipe discovery, and equipment textures. A graphical playtest is still recommended: this build environment cannot create the sockets needed for a display server.
+Minecraft's native parsers also validate all 132 models, 72 client item definitions, 18 equipment definitions, and 26 blockstate definitions. Its text wrapping code verifies all 62 book pages fit the reading area using the vanilla font's glyph widths. A resource audit checks model/texture references, translations, loot tables, recipe discovery, equipment textures, third-party asset hashes, audio formats, sounds, and worldgen wiring. A local graphical smoke test on a virtual display verified the cathedral, statues, paintings and custom monk renderer. Actual in-game screenshots are included below. Audio decoding and jukebox behavior are tested; the virtual display uses a dummy audio output, so listening on real speakers is recommended.
 
 The [Vatican's traditional Stations outline](https://www.vatican.va/news_services/liturgy/2005/documents/ns_lit_doc_20050325_via-crucis_en.html) provides a reference for the station sequence. The reflections in this mod are original. Historic Latin prayers are also documented in the [Compendium's common prayers appendix](https://www.vatican.va/archive/compendium_ccc/documents/archive_2005_compendium-ccc_en.html).
 
@@ -117,6 +162,6 @@ The [Vatican's traditional Stations outline](https://www.vatican.va/news_service
 python3 tools/package_release.py
 ```
 
-This creates `releases/catholicraft-1.1.0.zip` with the playable JAR, complete source, installation instructions, original art previews, validation results, and file checksums. The packager requires a passing current test report and client validation log; it excludes caches, development run worlds, secrets, and the development test JAR.
+This creates `releases/catholicraft-1.2.0.zip` with the playable JAR, complete source, installation instructions, original art previews, validation results, and file checksums. The packager requires a passing current test report and client validation log; it excludes caches, development run worlds, secrets, and the development test JAR.
 
-Source and original textures are licensed under MIT. Minecraft and NeoForge are separate dependencies and are not bundled in the mod jar.
+Source, models, architecture and original textures are licensed under MIT. Imported paintings and recordings retain their separately documented public-domain status. Minecraft and NeoForge are separate dependencies and are not bundled in the mod jar.

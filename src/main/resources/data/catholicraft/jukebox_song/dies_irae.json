@@ -1,0 +1,8 @@
+{
+  "sound_event": "catholicraft:chant.dies_irae",
+  "description": {
+    "translate": "song.catholicraft.dies_irae"
+  },
+  "length_in_seconds": 434.000952,
+  "comparator_output": 15
+}

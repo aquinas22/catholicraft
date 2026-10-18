@@ -1,0 +1,29 @@
+{
+  "chant.veni_creator": {
+    "subtitle": "subtitles.catholicraft.veni_creator",
+    "sounds": [
+      {
+        "name": "catholicraft:chant/veni_creator",
+        "stream": true
+      }
+    ]
+  },
+  "chant.veni_sancte": {
+    "subtitle": "subtitles.catholicraft.veni_sancte",
+    "sounds": [
+      {
+        "name": "catholicraft:chant/veni_sancte",
+        "stream": true
+      }
+    ]
+  },
+  "chant.dies_irae": {
+    "subtitle": "subtitles.catholicraft.dies_irae",
+    "sounds": [
+      {
+        "name": "catholicraft:chant/dies_irae",
+        "stream": true
+      }
+    ]
+  }
+}

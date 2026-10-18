@@ -1,13 +1,16 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "ingredients": [
-    "minecraft:book",
-    "minecraft:brown_dye",
-    "minecraft:gold_nugget"
-  ],
-  "result": {
-    "id": "catholicraft:stations_book",
-    "count": 1
+  "type": "catholicraft:workbench",
+  "recipe": {
+    "type": "minecraft:crafting_shapeless",
+    "category": "misc",
+    "ingredients": [
+      "minecraft:book",
+      "minecraft:brown_dye",
+      "minecraft:gold_nugget"
+    ],
+    "result": {
+      "id": "catholicraft:stations_book",
+      "count": 1
+    }
   }
 }

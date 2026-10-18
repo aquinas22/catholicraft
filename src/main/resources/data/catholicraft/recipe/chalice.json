@@ -1,16 +1,19 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "pattern": [
-    "G G",
-    " G ",
-    "GGG"
-  ],
-  "key": {
-    "G": "minecraft:gold_ingot"
-  },
-  "result": {
-    "id": "catholicraft:chalice",
-    "count": 1
+  "type": "catholicraft:workbench",
+  "recipe": {
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "pattern": [
+      "G G",
+      " G ",
+      "GGG"
+    ],
+    "key": {
+      "G": "minecraft:gold_ingot"
+    },
+    "result": {
+      "id": "catholicraft:chalice",
+      "count": 1
+    }
   }
 }

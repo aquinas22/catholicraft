@@ -41,7 +41,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class ChapelBlock extends Block {
-    public enum Kind { ALTAR, CRUCIFIX, FONT, CANDLE, LAMP, BELL, KNEELER, PEW, CHALICE, CIBORIUM, MONSTRANCE, WREATH, VOTIVE, STATIONS, STATUE, TABLE, AMBO }
+    public enum Kind { ALTAR, CRUCIFIX, FONT, CANDLE, LAMP, BELL, KNEELER, PEW, CHALICE, CIBORIUM, MONSTRANCE, WREATH, VOTIVE, STATIONS, STATUE, TABLE, AMBO, ART }
     public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
@@ -74,8 +74,9 @@ public class ChapelBlock extends Block {
             case MONSTRANCE -> Shapes.or(box(4, 0, 4, 12, 2, 12), box(7, 2, 7, 9, 6, 9), box(2, 6, 7, 14, 14, 9), box(7, 14, 7, 9, 16, 9));
             case WREATH -> Shapes.or(box(2,0,2,14,3,14),box(4,3,4,12,10,12));
             case VOTIVE -> Shapes.or(box(1,0,2,3,12,14),box(13,0,2,15,12,14),box(0,8,1,16,10,15),box(1,10,2,15,14,14));
+            case ART -> box(0,0,13,16,16,16);
             case STATIONS -> box(1,0,6,15,16,10);
-            case STATUE -> Shapes.or(box(3,0,3,13,2,13),box(5,2,5,11,11,11),box(6,11,6,10,16,10));
+            case STATUE -> Shapes.or(box(2.5,0,2.5,13.5,1.7,13.5),box(3.4,1.7,3.8,11.4,11.8,10.7),box(5,11.8,6,11,15.6,9.8));
             case TABLE -> Shapes.or(box(0,11,0,16,14,16),box(1,0,1,3,11,3),box(13,0,1,15,11,3),box(1,0,13,3,11,15),box(13,0,13,15,11,15));
             case AMBO -> Shapes.or(box(2,0,2,14,2,14),box(4,2,6,12,12,14),box(1,12,3,15,15,15));
         };
@@ -93,6 +94,10 @@ public class ChapelBlock extends Block {
 
     @Override
     protected InteractionResult useItemOn(ItemStack stack, BlockState s, Level l, BlockPos p, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (kind == Kind.ALTAR && (stack.is(ModContent.MISSAL_1962.get()) || stack.is(ModContent.MODERN_MISSAL.get()))) {
+            if (l.getBlockEntity(p) instanceof MassAltarBlockEntity altar) return altar.interact(player, stack);
+            return InteractionResult.SUCCESS;
+        }
         if (kind==Kind.ALTAR && stack.getItem() instanceof AltarClothItem cloth) {
             if (s.getValue(CLOTH)==cloth.color()) return InteractionResult.SUCCESS;
             if (!l.isClientSide()) {
@@ -146,6 +151,14 @@ public class ChapelBlock extends Block {
 
     @Override
     protected InteractionResult useWithoutItem(BlockState s, Level l, BlockPos p, Player player, BlockHitResult hit) {
+        if (kind == Kind.ALTAR) {
+            if (!l.isClientSide() && l.getBlockEntity(p) instanceof MassAltarBlockEntity altar) altar.showStatus(player);
+            return InteractionResult.SUCCESS;
+        }
+        if (kind == Kind.ART) {
+            if (!l.isClientSide()) player.sendSystemMessage(Component.translatable("art.catholicraft." + net.minecraft.core.registries.BuiltInRegistries.BLOCK.getKey(this).getPath()));
+            return InteractionResult.SUCCESS;
+        }
         if (kind==Kind.PEW && l instanceof ServerLevel server) return PewSeating.sit(server,p,s,player);
         if (kind==Kind.PEW) return InteractionResult.SUCCESS;
         if (kind==Kind.STATIONS) {
@@ -220,7 +233,8 @@ public class ChapelBlock extends Block {
     }
 
     /** Specialized state definitions avoid multiplying unrelated blocks' possible states. */
-    public static final class Altar extends ChapelBlock {
+    public static final class Altar extends ChapelBlock implements net.minecraft.world.level.block.EntityBlock {
+        @Override public net.minecraft.world.level.block.entity.BlockEntity newBlockEntity(BlockPos pos, BlockState state) { return new MassAltarBlockEntity(pos, state); }
         public Altar(Properties p) { super(p,Kind.ALTAR); }
         @Override protected void createBlockStateDefinition(StateDefinition.Builder<Block,BlockState> b) { super.createBlockStateDefinition(b); b.add(CLOTH); }
         @Override protected MapCodec<Altar> codec() { return simpleCodec(Altar::new); }
