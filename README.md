@@ -2,6 +2,19 @@
 
 A Catholic chapel-building mod for **Minecraft Java Edition 26.2**, **NeoForge 26.2.0.90**, and **Java 25**. Works in singleplayer and on a server with the mod installed on both sides.
 
+## Download (Windows, easy install)
+
+**[⬇ Download CatholiCraft 1.4.0 for Minecraft 1.21.1](https://github.com/aquinas22/catholicraft/releases/latest/download/CatholiCraft-1.4.0-MC1.21.1.zip)**
+
+1. Install Minecraft Java Edition and play vanilla **1.21.1** once, then close the launcher.
+2. Right-click the ZIP and choose **Extract All...**
+3. Double-click `install.bat` in the extracted folder. If SmartScreen warns, choose **More info → Run anyway**.
+   It installs NeoForge 21.1.262 when it is missing and copies the mod into `%APPDATA%\.minecraft\mods`.
+4. In the Minecraft Launcher, select the **NeoForge** profile and press **Play**.
+
+Manual install: install [NeoForge 21.1.262](https://neoforged.net/) for 1.21.1 and put `catholicraft-1.4.0.jar`
+from the ZIP into your `mods` folder. Servers need the same mod.
+
 ## Install and play
 
 1. Install the NeoForge profile for Minecraft **26.2**.
