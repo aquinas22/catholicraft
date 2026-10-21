@@ -112,8 +112,6 @@ There are **72 registered items**, including **26 placeable blocks**, **18 weara
 
 The missals are readable introductory companions, with original explanatory text and short traditional prayers; they are not complete reproductions of either liturgical book. Furnishings and vestments are game representations. Holy-water crafting and status effects are Minecraft mechanics.
 
-![Original item textures](docs/item-preview.png)
-
 ## Controls and commands
 
 All five books can be read in the hand or placed on a vanilla lectern. Right-click a vestment to equip it, or put it in its inventory slot: chasubles, dalmatics, cassock, and surplice on the chest; alb on the legs; biretta or mitre on the head; shoes on the feet. They are cosmetic clothing without armor protection.
@@ -171,14 +169,6 @@ Each cathedral has three resident monks, twin accessible belfries, a rose window
 Use a monk to see the current offer, sneak-use to cycle, then use an emerald to buy: prayer book, eight incense, rosary, twelve altar bread, Veni Creator disc, or four wine cruets. Overflow drops beside you. Monks can also be summoned with `/catholicraft monk` or `/summon catholicraft:monk`.
 
 `/catholicraft cathedral` places the same furnished template three blocks east and fourteen north of you. It requires an entirely clear, loaded **41 × 25 × 29** volume and checks it before construction. The chapel builder retains its 15 × 11 × 8 clearance checks. Both commands require cheats or operator permission.
-
-![Cathedral in Minecraft](docs/cathedral-preview.png)
-
-![Statues in Minecraft](docs/statue-preview.png)
-
-![Monk in Minecraft](docs/monk-preview.png)
-
-![Public-domain paintings in Minecraft](docs/art-preview.png)
 
 ## Build and develop
 
