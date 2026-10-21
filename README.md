@@ -1,21 +1,73 @@
-# CatholiCraft
+<h1 align="center">CatholiCraft</h1>
 
-A Catholic chapel-building mod for **Minecraft Java Edition 26.2**, **NeoForge 26.2.0.90**, and **Java 25**. Works in singleplayer and on a server with the mod installed on both sides.
+<p align="center">
+  <img src="docs/screenshots/cathedral-rose-window.jpg" alt="Inside a CatholiCraft cathedral, looking toward the west rose window" width="100%">
+</p>
+
+<p align="center">
+  <b>Cathedrals, abbeys and parish churches, monks who keep the Hours, a priest who baptises,<br>
+  guided Masses (traditional and modern), sacred art, Gregorian chant and vestments, for Minecraft Java Edition.</b>
+</p>
+
+<p align="center">
+  <a href="https://github.com/aquinas22/catholicraft/releases/latest/download/CatholiCraft-1.4.0-MC1.21.1.zip"><img src="https://img.shields.io/badge/Download-CatholiCraft%201.4.0-8b1a1a?style=for-the-badge&logo=windows&logoColor=white" alt="Download CatholiCraft 1.4.0"></a>
+  <br>
+  <img src="https://img.shields.io/badge/Minecraft-1.21.1-3c8527?style=flat-square" alt="Minecraft 1.21.1">
+  <img src="https://img.shields.io/badge/NeoForge-21.1.262-e07a1f?style=flat-square" alt="NeoForge 21.1.262">
+  <img src="https://img.shields.io/badge/license-MIT-555?style=flat-square" alt="MIT license">
+</p>
 
 ## Download (Windows, easy install)
 
-**[⬇ Download CatholiCraft 1.4.0 for Minecraft 1.21.1](https://github.com/aquinas22/catholicraft/releases/latest/download/CatholiCraft-1.4.0-MC1.21.1.zip)**
-
 1. Install Minecraft Java Edition and play vanilla **1.21.1** once, then close the launcher.
-2. Right-click the ZIP and choose **Extract All...**
+2. **[Download the ZIP](https://github.com/aquinas22/catholicraft/releases/latest/download/CatholiCraft-1.4.0-MC1.21.1.zip)**, right-click it and choose **Extract All...**
 3. Double-click `install.bat` in the extracted folder. If SmartScreen warns, choose **More info → Run anyway**.
    It installs NeoForge 21.1.262 when it is missing and copies the mod into `%APPDATA%\.minecraft\mods`.
 4. In the Minecraft Launcher, select the **NeoForge** profile and press **Play**.
 
 Manual install: install [NeoForge 21.1.262](https://neoforged.net/) for 1.21.1 and put `catholicraft-1.4.0.jar`
-from the ZIP into your `mods` folder. Servers need the same mod.
+from the ZIP into your `mods` folder. Works in singleplayer, and on servers that have the mod installed too.
 
-## Install and play
+## Screenshots
+
+<table>
+<tr>
+<td width="50%"><img src="docs/screenshots/cathedral-exterior.jpg" alt="A Gothic cathedral with twin towers and a west rose"><br><sub><b>A Gothic cathedral with twin towers and a west rose</b></sub></td>
+<td width="50%"><img src="docs/screenshots/cathedral-night.jpg" alt="The nave at night under the rose window"><br><sub><b>The nave at night under the rose window</b></sub></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/screenshots/mass-elevation.jpg" alt="Conventual Mass: the elevation at the Roman Canon"><br><sub><b>Conventual Mass: the elevation at the Roman Canon</b></sub></td>
+<td width="50%"><img src="docs/screenshots/procession.jpg" alt="The entrance procession during the Kyrie"><br><sub><b>The entrance procession during the Kyrie</b></sub></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/screenshots/vespers.jpg" alt="Monks singing Vespers in choir"><br><sub><b>Monks singing Vespers in choir</b></sub></td>
+<td width="50%"><img src="docs/screenshots/monks.jpg" alt="Benedictines, Dominicans and Franciscans of every rank"><br><sub><b>Benedictines, Dominicans and Franciscans of every rank</b></sub></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/screenshots/parish-mass.jpg" alt="Parish Mass in a village church"><br><sub><b>Parish Mass in a village church</b></sub></td>
+<td width="50%"><img src="docs/screenshots/priest-blessing.jpg" alt="Talk to the parish priest for blessings and holy water"><br><sub><b>Talk to the parish priest for blessings and holy water</b></sub></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/screenshots/benedictine-abbey.jpg" alt="Benedictine abbeys generate in the world"><br><sub><b>Benedictine abbeys generate in the world</b></sub></td>
+<td width="50%"><img src="docs/screenshots/franciscan-cloister.jpg" alt="A Franciscan friary cloister garth"><br><sub><b>A Franciscan friary cloister garth</b></sub></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/screenshots/village-church.jpg" alt="Villages get their own parish church"><br><sub><b>Villages get their own parish church</b></sub></td>
+<td width="50%"><img src="docs/screenshots/st-michael-shrine.jpg" alt="The shrine of St. Michael the Archangel"><br><sub><b>The shrine of St. Michael the Archangel</b></sub></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/screenshots/monstrance.jpg" alt="Monstrance and altar candles"><br><sub><b>Monstrance and altar candles</b></sub></td>
+<td width="50%"><img src="docs/screenshots/our-lady.jpg" alt="Statue of Our Lady in a candlelit niche"><br><sub><b>Statue of Our Lady in a candlelit niche</b></sub></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/screenshots/adoration-chapel.jpg" alt="A Dominican adoration chapel"><br><sub><b>A Dominican adoration chapel</b></sub></td>
+<td width="50%"><img src="docs/screenshots/vestments.jpg" alt="Vestments for players and mobs, from cassock to mitre"><br><sub><b>Vestments for players and mobs, from cassock to mitre</b></sub></td>
+</tr>
+</table>
+
+## Install the 26.2 edition
+
+This source tree also targets **Minecraft Java Edition 26.2**, **NeoForge 26.2.0.90**, and **Java 25**.
 
 1. Install the NeoForge profile for Minecraft **26.2**.
 2. Copy `build/libs/catholicraft-1.2.0.jar` into that profile's `mods` folder. If using the release ZIP, take the JAR from its `mods` folder.
